@@ -1,3 +1,5 @@
+**NOTE** : This is a work in progress draft of a proposed dev and release policy for the Node.js Foundation TSC. This document currently has no official standing within the Node.js or io.js projects or Node.js Foundation. The intent for this draft to be put up for discussion in a joint Node.js and io.js TC meeting on Thursday, April 9th, 2015.
+
 ## Contributing
 
 ### Collaborators
