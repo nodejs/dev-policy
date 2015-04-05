@@ -101,7 +101,7 @@ Before a new major release master is branched for LTS releases of the prior majo
 
 Additionally there are branches for stable release lines prior to 1.0 of minor versions. Example: `0.8.x`, `0.10.x`, `0.12.x`.
 
-All branches other than master are managed by the LTS Working Group and fall under the LTS release policy.
+All release branches other than master are managed by the LTS Working Group and fall under the LTS release policy.
 
 ### Release Versioning
 
