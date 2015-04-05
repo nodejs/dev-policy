@@ -32,10 +32,7 @@ Contributions to the Project are made on a collaborative basis. Any individual w
 
 All Pull Requests submitted by individuals who are not currently Collaborators must be signed-off on by an existing Collaborator before the PR will be considered. The sponsoring Collaborator becomes responsible for the PR.
 
-Non-Trivial Pull Requests from an existing Collaborator must be signed-off
-by at least one other Collaborator with sufficient expertise to evaluate the specific PR.
-
-Trivial Pull Requests from an existing Collaborator (e.g. those which fix minor bugs or improve performance without affecting API or causing other wide-reaching impact) may be landed without additional review or sign-off.
+Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator with sufficient expertise to evaluate the specific PR. Collaborators are encouraged to seek additional review and sign-off for non-trivial changes. A Trivial Change is any which fixes minor bugs or improves performance without affecting API or causing other wide-reaching impact.
 
 Before any Pull Request is landed, sufficient time should be given to receive input from other Collaborators. Specifically, at least 48 hours during the typical working week and 72 hours over weekends should be given to account for international time differences and work schedules. Trivial Pull Requests may be landed after a shorter delay.
 
