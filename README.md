@@ -55,15 +55,15 @@ Additionally, Collaborators should:
 
 ### Issue and Pull Request Tagging
 
-All issues and pull requests should be tagged with their respective feature areas. This helps organize issues and makes it easier for Collaborators to keep track of the items most relevant to them.
+All Issues and Pull Requests should be tagged with their respective feature areas. This helps organize issues and makes it easier for Collaborators to keep track of the items most relevant to them.
 
 The labels *discuss*, *meta*, *future*, and *ideas* are used to label issues that are not bugs or features requests.
 
-The *help-wanted* tag is used to draw attention to issues and pull requests that need contributions.
+The *help-wanted* tag is used to draw attention to Issues and Pull Requests that need contributions.
 
-When a pull request is not ready to merge and is still be iterated on and reviewed it should have the *in-progress* tag applied.
+When a Pull Request is not ready to merge and is still be iterated on and reviewed it should have the *in-progress* tag applied.
 
-The *semver-minor* and *semver-major* tags are used for pull requests that will cause a version iteration other than patch once released.
+The *semver-minor* and *semver-major* tags are used for Rull Requests that will cause a version iteration other than patch once released.
 
 The *tsc-agenda* tag is used to elevate items to the next TSC meeting. TSC meeting notes and announcements should have the *tsc-meeting* tag.
 
@@ -73,7 +73,7 @@ Every Working Group must specify a tag that can be used to indicate items for re
 
 ### Release Branches
 
-The *master* branch is the current major release branch. Most pull requests are sent to this branch and it is the default repo branch.
+The *master* branch is the current major release branch. Most Pull Requests are sent to this branch and it is the default repo branch.
 
 Before a new major release master is branched for LTS releases of the prior major. Example: `1.x`, `2.x`.
 
@@ -169,5 +169,11 @@ By making a contribution to this project, I certify that:
 
 1. What about things like http_parser and libuv? Does it make sense to see about bringing each into the foundation as their own projects?
 2. What about all the other repos under iojs/* and joyent/*, which of those will move over to the foundation?
-3. The Node.js TC is working to introduce the notion of Release Candidates into the release cycle. It's not yet clear how this lines up with the semver release strategy used by io.js. This will need to be explored.
-4. The Node.js TC has recently adopted a priority tagging strategy (e.g P-1, P-2, P-3, P-4) to indicate the priority of a given issue or PR. It's not yet clear how and if this will fit into the larger project strategy.
+
+## Notes
+
+1. The existing Node.js Workflow (https://nodejs.org/documentation/workflow/) contains the notion of "Milestones" (https://nodejs.org/documentation/workflow/#index_md_flexible_workflow_only_two_strict_rules). These are essentially Long Term Support Release targets used as goalposts for landing specific edits. The "LTS Candidate" process described in the Long Term Release section above would largely replace the Milestone mechanism. When the LTS WG declares that a particular Major.Minor release is an LTS Candidate, a Milestone should be created identifying it as such. The PR or Issue can then be associated so that Issues or PR's that should be landed or closed before cutting the LTS Release can be tracked.
+
+2. The existing Node.js Workflow requires that all PR's can only be landed using a specific Jenkin's "node-accept-pull-request" job. This document requires that all PR's must be tested to ensure that all tests pass but it does not go into specific detail on the CI process. It is expected that a Release Working Group will establish the specific step-by-step process by which Pull Requests must be landed.
+
+3. The existing Node.js Workflow recently introduced the notion of "Priority" and "Status" tags for Issues. For instance, the *P-0* tag can be used to label issues that break node on at least one supported platform and need to be resolved as quickly as possible. The intent of the Priority tags is to assist in the triage of issues and help Collaborators determine which issues to work on first. The io.js project currently does not have a similar mechanism and feedback from io.js participants has been that such a Priority tagging system may not be of use given the way they've chosen to handle issues.
