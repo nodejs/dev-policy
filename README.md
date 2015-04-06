@@ -26,7 +26,7 @@ Before any Pull Request is landed, sufficient time should be given to receive in
 
 If it becomes apparent that the changes proposed by a given Pull Request: (a) have significant impact on the project as a whole; (b) are inherently controversial; or (c) have failed to reach consensus amongst Collaborators, the Pull Request can be elevated for review by either a specific Working Group (by attaching a WG specific tag to the PR) or the TSC (by attaching the *tsc-agenda* tag to the PR). Pull Requests that have been flagged for TSC or Working Group review must not be landed until the TSC or Working Group has had sufficient opportunity to review the issue and render a decision. A Working Group may choose to defer the issue to the TSC.
 
-Pull Requests that require an increase in the Major version must be elevated for review by the TSC.
+Pull Requests that require an increase in the Major version must be elevated for review by the TSC. This does not necessarily mean that the PR must be put onto the TSC meeting agenda. If enough TSC members sign-off on the PR and there is clear consensus among TSC members for the change, the Pull Request can be landed. Where there is disagreement among TSC members, *semver-major* Pull Requests should be put on the TSC meeting agenda.
 
 Specific Collaborators or Working Groups can be requested to review any PR by using an *@-mention* either within the PR text itself or the associated comment stream.
 
@@ -65,7 +65,7 @@ The *help-wanted* tag is used to draw attention to Issues and Pull Requests that
 
 When a Pull Request is not ready to merge, and is still being iterated on or reviewed, it should have the *in-progress* tag applied.
 
-The *semver-minor* and *semver-major* tags are used for Rull Requests that will cause a version iteration other than patch once released.
+The *semver-minor* and *semver-major* tags are used for Pull Requests that will cause a version iteration other than patch once released.
 
 The *tsc-agenda* tag is used to elevate items to the next TSC meeting. TSC meeting notes and announcements should have the *tsc-meeting* tag.
 
