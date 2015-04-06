@@ -14,66 +14,44 @@ Individuals can self-nominate the TSC for Collaborator status by submitting an i
 
 Collaborators can be nominated to become members of the TSC following the same nomination and approval model. However, Collaborators cannot nominate themselves for TSC membership.
 
-### Consensus Seeking Process
+### Accepting Modifications through a Consensus Seeking Process
 
-Like the TSC governance, all issues and pull requests follow a Consensus Seeking decision making model as described in the Project TSC Charter.
+A "Contribution" to the Project is any work that is voluntarily submitted to the project. These include not only source code in the form of bug fixes, code improvements, new functions, etc, but contributions to documentation, design etc that are intended for the overall improvement of the project.
 
-Collaborators may opt to elevate significant or controversial modifications, or modifications that have not found consensus to the TSC for discussion by assigning the tsc-agenda tag to a pull request or issue. The TSC should serve as the final arbiter where required.
+Contributions to the Project are made on a collaborative basis. Any individual with a GitHub account may propose a contribution by submitting a Pull Request (PR). Like the TSC governance, acceptance of Contributions (a.k.a. "landing a Pull Request") into the Project follow the Consensus Seeking decision making model as described in the Project TSC Charter.
 
-If full TSC review is not required, and there is a Working Group whose charter covers the subject of the issue or pull request, then it can be tagged using a Working Group specific tag (to be selected by the Working Group itself). In such cases, the WG can decide whether to further elevate the item to the full tsc (using the *tsc-agenda* tag) or decide on the matter itself.
+All Pull Requests submitted by individuals who are not Collaborators must be signed-off on by an existing Collaborator before the PR will be considered. The sponsoring Collaborator becomes responsible for the PR. Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator.
 
-In either case, issues or PR’s for which additional review is required should have the review-required tag added and removed only after either the Working Group or TSC decision has been made.
+Before any Pull Request is landed, sufficient time should be given to receive input from other Collaborators with sufficient expertise to evaluate the changes. Specifically, at least 48 hours during the typical working week and 72 hours over weekends should be given to account for international time differences and work schedules. Trivial Pull Requests may be landed after a shorter delay.
 
-### Accepting Modifications
-
-A "Contribution" to the project is any work that is voluntarily submitted to the project. These include not only source code in the form of bug fixes, code improvements, new functions, etc, but contributions to documentation, design etc that are intended for the overall improvement of the project.
-
-Contributions to the Project are made on a collaborative basis. Any individual with a GitHub account may propose a contribution by submitting a Pull Request (PR). Contributions must be evaluated by project Collaborators with sufficient expertise and approved using the Consensus Seeking Process described above.
-
-All Pull Requests submitted by individuals who are not currently Collaborators must be signed-off on by an existing Collaborator before the PR will be considered. The sponsoring Collaborator becomes responsible for the PR.
-
-Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator with sufficient expertise to evaluate the specific PR. Collaborators are encouraged to seek additional review and sign-off for non-trivial changes. A Trivial Change is any which fixes minor bugs or improves performance without affecting API or causing other wide-reaching impact.
-
-Before any Pull Request is landed, sufficient time should be given to receive input from other Collaborators. Specifically, at least 48 hours during the typical working week and 72 hours over weekends should be given to account for international time differences and work schedules. Trivial Pull Requests may be landed after a shorter delay.
-
-If any Collaborator feels that a particular PR is controversial and needs to be reviewed further, the Collaborator can call attention to the Pull Request by attaching either the *tsc-agenda* tag (to put the Pull Request on the TSC agenda) or a Working Group specific tag to indicate that the PR requires review from a specific Working Group. PR’s that are put onto the TSC or WG agenda cannot be landed until the tagged WG or TSC has the opportunity to review and decide using the Consensus Seeking Model.
-
-Elevationg of Pull Requests or issues to the TSC or WG should occur when the Pull Request:
-
-* has a significant impact on the codebase,
-* is inherently controversial; or
-* has failed to reach consensus amongst the Collaborators who are actively participating in the discussion.
-
-The TSC serves as the final arbiter where required but it is expected that most changes reaching a lazy consensus are merged without TSC intervention.
+If it becomes apparent that the changes proposed by a given Pull Request: (a) have significant impact on the project as a whole; (b) are inherently controversial; or (c) have failed to reach consensus amongst Collaborators, the Pull Request can be elevated for review by either a specific Working Group (by attaching a WG specific tag to the PR) or the TSC (by attaching the *tsc-agenda* tag to the PR). Pull Requests that have been flagged for TSC or Working Group review must not be landed until the TSC or Working Group has had sufficient opportunity to review the issue and render a decision. A Working Group may choose to defer the issue to the TSC.
 
 Specific Collaborators or Working Groups can be requested to review any PR by using an *@-mention* either within the PR text itself or the associated comment stream.
 
-Collaborators sign off on a PR by explicitly stating their approval in the PR text or associated comment stream. If a Collaborator is unsure about the modification or is not prepared to take full responsibility for the change, they should defer to another Collaborator.
+Collaborators sign-off on a Pull Request by explicitly stating their approval in the PR text or associated comment stream. If a Collaborator is unsure about the modification or is not prepared to take full responsibility for the change, they should defer to another Collaborator.
 
-For high priority changes that address security vulnerabilities, a shorter review period may be necessary depending on the nature of the change and severity of the issue. It is recommended that the TSC establish a special Security Working Group of Collaborators with recognized security expertise that can be tasked with reviewing security related Pull Requests.
+Exception to this process is allowed for high-priority changes that address security vulnerabilities. A shorter review period and modified sign-off process may be necessary depending on the nature of the change and severity of the issue. It is recommended that the TSC establish a Security Working Group of Collaborators with recognized security expertise that can be tasked with reviewing security related Pull Requests and determining an appropriate review process.
 
-Where there is no disagreement amongst Collaborators, a PR may be landed given appropriate review. Where there is disagreement amongst Collaborators, consensus should be sought if possible. The lack of consensus may indicate the need to elevate discussion to the either a Working Group or TSC for resolution (see below).
+All Pull Requests that either fix bugs or introduce new functionality require at least one test case demonstrating the defect or validating the intended functionality. For bug fixes, the test should fail before the change, and pass after the change.
 
-All Pull Requests that either fix bugs or introduce new functionality require at least one test case demonstrating the defect or validating the intended functionality. For bug fixes, the test should fail before the change, and pass after the change. Pull Requests for changes intended to improve performance should contain a benchmark demonstrating the performance impact. The test should demonstrate improved performance after the change is applied.
+Pull Requests for changes intended to improve performance require a benchmark demonstrating the performance impact. The benchmark should demonstrate improved performance after the change is applied.
 
 ### Branches
 
-The Project source repository will be organized into a single *master* branch and multiple Release branches. All modifications intended for the current major release line must be made to the master branch and must follow the guidelines detailed in this document. Modifications to Release branches are limited to bug fixes, with priority given to PR’s that address specific security vulnerabilities. Oversight of the Release branches belongs to the Long Term Support (LTS) Working Group. The LTS Working Group will establish policies for landing Pull Requests into Release branches.
+The Project source repository will be organized into a single *master* branch, multiple Release branches, and multiple Development Branches. All modifications intended for the current major release line must be made to the *master* branch and must follow the guidelines detailed in this document. Modifications to Release branches are limited to bug fixes, with priority given to changes that address specific security vulnerabilities. Oversight of the Release branches belongs to the Long Term Support (LTS) Working Group. The LTS Working Group will establish policies for landing Pull Requests into Release branches.
 
 ### Landing Pull Requests
 
-When Landing a Pull Request, always modify the original commit message to include additional meta information regarding the change process:
+When Landing a Pull Request, a Collaborator must modify the original commit message to include the following additional meta information regarding the change process:
 
 * A `Reviewed-By: Name <email>` line for yourself and any other Collaborators who have reviewed the change.
-* A `PR-URL:` line that references the full GitHub URL of the original pull request being merged so it's easy to trace a commit back to the conversation that lead up to that change.
-* A `Fixes: X` line as appropriate, where `X` includes the full GitHub URL for an issue, and/or the hash and commit message if the commit fixes a bug in a previous commit. Multiple Fixes: lines may be added if appropriate.
+* A `PR-URL:` line that references the full GitHub URL of the original Pull Request being merged so it's easy to trace a commit back to the conversation that lead up to that change.
+* A `Fixes: X` line as appropriate, where `X` includes the full GitHub URL for an issue, and/or the complete or abbreviated hash identifier and commit message if the commit fixes a bug in a previous commit. Multiple `Fixes:` lines may be added if appropriate.
 
-See the commit log for examples such as this one if unsure exactly how to format your commit messages.
+Additionally, Collaborators should:
 
-Additionally:
-
-* Double check PR's to make sure the author's full name and email address are correct before merging.
-* Except when updating dependencies, all commits should be self contained. Meaning, every commit should pass all tests. This makes it much easier when bisecting to find a breaking change.
+* Double check Pull Requests to make sure the author's full name and email address are correct before merging.
+* Verify that every commit passes all tests.
 
 ### Issue and Pull Request Tagging
 
@@ -101,7 +79,7 @@ Before a new major release master is branched for LTS releases of the prior majo
 
 Additionally there are branches for stable release lines prior to 1.0 of minor versions. Example: `0.8.x`, `0.10.x`, `0.12.x`.
 
-All release branches other than master are managed by the LTS Working Group and fall under the LTS release policy.
+All Release Branches other than master are managed by the LTS Working Group and fall under the LTS release policy.
 
 ### Release Versioning
 
@@ -151,7 +129,7 @@ To avoid introducing unnecessary problems for users, the interim releases should
 
 To facilitate and oversee the Convergence effort, the TSC will charter a Convergence Work Group. This WG will ensure that appropriate steps are being made in each of the two release lines to bring the projects back together. The Convergence WG will work directly with both release line WG’s. As soon as the release lines converge, the charters for the separate release line WG’s and the convergence WG will expire, and responsibility for the continued evolution of the converged release line will be with the project TSC itself. The initial membership of the Convergence WG will be a subset of members from each of the two release line WG’s.
 
-For the Converged Project, a new Github organization owned and managed by the Node.js Foundation will be created. Once the new Github organization is established, ownership of the existing iojs/io.js and joyent/node repositories should be transferred. From there, the Convergence WG will be responsible for determining the exact next steps for creating the Converged repository.
+For the Converged Project, a new Github organization owned and managed by the Node.js Foundation will be created. Once the new Github organization is established, ownership of the existing iojs/io.js and joyent/node repositories should be transferred. From there, the Convergence WG will be responsible for determining the exact next steps for creating the Converged repository. Additional repositories from each of the existing joyent/* and iojs/* organizations may need to be transferred to the Node.js Foundation organization as well.
 
 The Converged repository must contain release branches for all prior stable lines from both release lines.
 
