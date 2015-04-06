@@ -4,27 +4,29 @@
 
 ### Collaborators
 
-The Node.js project is maintained by individual Collaborators. The Technical Steering Committee (TSC) membership consists of key Collaborators who have demonstrated both technical expertise critical to the ongoing maintenance and evolution of the project and a long term commitment to driving the project and community forward. (TODO: Need to document the process by which Collaborators are nominated to the TSC)
+The Node.js project is maintained by individual Collaborators. The Technical Steering Committee (TSC) membership consists of key Collaborators who have demonstrated both technical expertise critical to the ongoing maintenance and evolution of the project and a long term commitment to driving the project and community forward.
 
-Individuals making ongoing significant and valuable contributions to the project can be nominated as Collaborators by TSC members. Once the nomination is approved by the TSC, the invitation to become a Collaborator is extended to the individual. The invitation must include a copy of the project Developer’s Certificate of Origin (DCO, see below). Assuming the individual accepts the invitation, they are granted commit-access to the project.
+Individuals can be nominated as Collaborators by TSC members. Once the nomination is approved by the TSC, the invitation to become a Collaborator is extended to the individual. The invitation must include a copy of the project Developer’s Certificate of Origin (DCO, see below). Assuming the individual accepts the invitation, they are granted commit-access to the project.
 
 Nominations for Collaborator Status happen through the typical TSC decision making process. That is, to nominate one or more Collaborators, an issue containing the names of all collaborators being nominated is created and put on the TSC meeting agenda. The issue is approved or rejected following the same Consensus Seeking Process used for any other issue or PR.
 
 Individuals can self-nominate the TSC for Collaborator status by submitting an issue requesting to be put on the TSC meeting agenda. In order to be considered however, such self-nominations must be sponsored by an existing TSC member, after which it follows the same process as above. To sponsor a nomination, the TSC member must indicate consent within the issue text or associated comment thread.
 
-Collaborators can be nominated to become members of the TSC following the same nomination and approval model. However, Collaborators cannot nominate themselves for TSC membership.
+Collaborators can be nominated to become members of the TSC following the same nomination and approval model. However, Collaborators cannot nominate themselves for TSC membership. An individual cannot be nominated and accepted into the TSC without first having been nominated and accepted as a Collaborator.
 
 ### Accepting Modifications through a Consensus Seeking Process
 
 A "Contribution" to the Project is any work that is voluntarily submitted to the project. These include not only source code in the form of bug fixes, code improvements, new functions, etc, but contributions to documentation, design etc that are intended for the overall improvement of the project.
 
-Contributions to the Project are made on a collaborative basis. Any individual with a GitHub account may propose a contribution by submitting a Pull Request (PR). Like the TSC governance, acceptance of Contributions (a.k.a. "landing a Pull Request") into the Project follow the Consensus Seeking decision making model as described in the Project TSC Charter.
+Contributions to the Project are made on a collaborative basis. Any individual with a GitHub account may propose a Contribution by submitting a Pull Request (PR). Like the TSC governance, acceptance of Contributions (a.k.a. "landing a Pull Request") into the Project follows the Consensus Seeking decision making model as described in the Project TSC Charter.
 
 All Pull Requests submitted by individuals who are not Collaborators must be signed-off on by an existing Collaborator before the PR will be considered. The sponsoring Collaborator becomes responsible for the PR. Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator.
 
 Before any Pull Request is landed, sufficient time should be given to receive input from other Collaborators with sufficient expertise to evaluate the changes. Specifically, at least 48 hours during the typical working week and 72 hours over weekends should be given to account for international time differences and work schedules. Trivial Pull Requests may be landed after a shorter delay.
 
 If it becomes apparent that the changes proposed by a given Pull Request: (a) have significant impact on the project as a whole; (b) are inherently controversial; or (c) have failed to reach consensus amongst Collaborators, the Pull Request can be elevated for review by either a specific Working Group (by attaching a WG specific tag to the PR) or the TSC (by attaching the *tsc-agenda* tag to the PR). Pull Requests that have been flagged for TSC or Working Group review must not be landed until the TSC or Working Group has had sufficient opportunity to review the issue and render a decision. A Working Group may choose to defer the issue to the TSC.
+
+Pull Requests that require an increase in the Major version must be elevated for review by the TSC.
 
 Specific Collaborators or Working Groups can be requested to review any PR by using an *@-mention* either within the PR text itself or the associated comment stream.
 
@@ -61,7 +63,7 @@ The labels *discuss*, *meta*, *future*, and *ideas* are used to label issues tha
 
 The *help-wanted* tag is used to draw attention to Issues and Pull Requests that need contributions.
 
-When a Pull Request is not ready to merge and is still be iterated on and reviewed it should have the *in-progress* tag applied.
+When a Pull Request is not ready to merge, and is still being iterated on or reviewed, it should have the *in-progress* tag applied.
 
 The *semver-minor* and *semver-major* tags are used for Rull Requests that will cause a version iteration other than patch once released.
 
@@ -75,11 +77,13 @@ Every Working Group must specify a tag that can be used to indicate items for re
 
 The *master* branch is the current major release branch. Most Pull Requests are sent to this branch and it is the default repo branch.
 
-Before a new major release master is branched for LTS releases of the prior major. Example: `1.x`, `2.x`.
+Before a new major release, master is branched for LTS releases of the prior major. Example: `1.x`, `2.x`. These become the "head" of the LTS release and are where Pull Requests addressing bugs in the branched stream are to be landed.
 
 Additionally there are branches for stable release lines prior to 1.0 of minor versions. Example: `0.8.x`, `0.10.x`, `0.12.x`.
 
 All Release Branches other than master are managed by the LTS Working Group and fall under the LTS release policy.
+
+During the interim period between the launch of the Foundation and the convergence of the two release lines, variations may exist in the specific release cycles for the Node.js v0.x stream and the io.js 1.x stream. These variations are allowed to aid in the transition process.
 
 ### Release Versioning
 
@@ -132,6 +136,8 @@ To facilitate and oversee the Convergence effort, the TSC will charter a Converg
 For the Converged Project, a new Github organization owned and managed by the Node.js Foundation will be created. Once the new Github organization is established, ownership of the existing iojs/io.js and joyent/node repositories should be transferred. From there, the Convergence WG will be responsible for determining the exact next steps for creating the Converged repository. Additional repositories from each of the existing joyent/* and iojs/* organizations may need to be transferred to the Node.js Foundation organization as well.
 
 The Converged repository must contain release branches for all prior stable lines from both release lines.
+
+Note: The specific details for how the organization will be created (e.g. if it would be a brand new organization or a migration of one or both of the existing organizations) has yet to be determined. This is a complex issue that will require careful thought. It will be the responsibility of the Convergence WG to determine the specific details.
 
 ### Long Term Support WG
 
