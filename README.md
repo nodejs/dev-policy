@@ -190,18 +190,23 @@ The most important consideration in every code change is the impact it will have
 When discussing stability, it is important to first review Node.js' layered architecture:
 
 ```
-   +-------------------------------------------+
-   |      Module and Application Ecosystem     |
-   +-------------------------------------------+
-            |                |               |
-   +----------------+        |               |
-   |  Node.js Core  |        |               |
-   |  Library API   |        |               |
-   +----------------+        |               |
-   |     js impl    |        |               |
-   +----------------+        |               |
-            |                |               |
-   +--------------------------------------+  |
+   +---------------------------------------------------+
+   |          Module and Application Ecosystem         |
+   +---------------------------------------------------+
+        |                |    |           |          |
+        |                | +----------------------+  |
+        |                | |  Native Abstractions |  |
+        |                | |      for Node.js     |  |
+        |                | +----------------------+  |
+        |                |     |             |       |
+   +----------------+    |     |             |       /
+   |  Node.js Core  |    |     |             |      /
+   |  Library API   |    |     |             |     /
+   +----------------+    |     |             |    /
+   |     js impl    |    |     |             |   /
+   +----------------+    |     |             |  /
+            |            |     |             | /
+   +--------------------------------------+  |/
    | Node.js Application Binary Interface |  |
    +--------------------------------------|  |
    |              C/C++ impl              |  |
@@ -212,7 +217,7 @@ When discussing stability, it is important to first review Node.js' layered arch
         +---------------------------------------+
 ```
 
-Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations.
+Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`nan`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
 
 Due to the existing layering, modules and applications are sensitive not only to changes in the Core Library API, but the Application Binary Interface and dependendencies as well.
 
@@ -220,13 +225,15 @@ Any API *addition* to either the Node.js Core Library API or Application Binary 
 
 Any *backwards incompatible* change to either the Node.js Core Library API or Application Binary Interface must result in a *semver-major* version increase.
 
+Issue: Should any modification to the ABI or Dependencies that requires module or application developers to recompile force a *semver-major* change?
+
 ### Dependency Stability
 
 #### JavaScript Support (V8)
 
 Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be supported and fully operational on all platforms officially targeted for support.
 
-When V8 ships a breaking change to their C++ API that can be handled by `nan` there will be a *semver-minor* version increase. (Issue: will `nan` become an official part of Node.js under the foundation? If not, we shouldn't depend on it here)
+When V8 ships a breaking change to their C++ API that can be handled by `nan` there will be a *semver-minor* version increase.
 
 When V8 ships a breaking change to their C++ API that cannot be handled by `nan` there will be a *semver-major* version increase.
 
