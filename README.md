@@ -227,6 +227,10 @@ Any *backwards incompatible* change to either the Node.js Core Library API or Ap
 
 Issue: Should any modification to the ABI or Dependencies that requires module or application developers to recompile force a *semver-major* change?
 
+APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and nan must not change within LTS Releases unless the change is required to address a critical security update.  
+
+Note that default or assumed behaviors and values are exposed via the API, ABI or Dependencies are considered to be part of the API. A change in a default value, for instance, counts as an API change as modules and applications may be written to assume certain defaults and could be broken.
+
 ### Dependency Stability
 
 #### JavaScript Support (V8)
