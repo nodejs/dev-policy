@@ -183,6 +183,69 @@ By making a contribution to this project, I certify that:
 
 (c) The contribution was provided directly to me by some other person who certified (a), (b) or (c) and I have not modified it.
 
+## Stability Policy
+
+The most important consideration in every code change is the impact it will have, positive or negative, on the ecosystem (modules and applications). To this end, all Collaborators must work collectively to ensure that changes do not needlessly break backwards compatibility, introduce performance or functional regressions, or negatively impact the usability of the Project on any of the platforms officially targeted for support by the Project. The TSC is responsible for determining the list of supported platforms.
+
+When discussing stability, it is important to first review Node.js' layered architecture:
+
+```
+   +-------------------------------------------+
+   |      Module and Application Ecosystem     |
+   +-------------------------------------------+
+            |                |               |
+   +----------------+        |               |
+   |  Node.js Core  |        |               |
+   |  Library API   |        |               |
+   +----------------+        |               |
+   |     js impl    |        |               |
+   +----------------+        |               |
+            |                |               |
+   +--------------------------------------+  |
+   | Node.js Application Binary Interface |  |
+   +--------------------------------------|  |
+   |              C/C++ impl              |  |
+   +--------------------------------------+  |
+                      |                      |
+        +---------------------------------------+
+        | Dependencies: v8, libuv, openssl, etc |
+        +---------------------------------------+
+```
+
+Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations.
+
+Due to the existing layering, modules and applications are sensitive not only to changes in the Core Library API, but the Application Binary Interface and dependendencies as well.
+
+Any API *addition* to either the Node.js Core Library API or Application Binary Interface must result in a *semver-minor* version increase.
+
+Any *backwards incompatible* change to either the Node.js Core Library API or Application Binary Interface must result in a *semver-major* version increase.
+
+### Dependency Stability
+
+#### JavaScript Support (V8)
+
+Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be supported and fully operational on all platforms officially targeted for support.
+
+When V8 ships a breaking change to their C++ API that can be handled by `nan` there will be a *semver-minor* version increase. (Issue: will `nan` become an official part of Node.js under the foundation? If not, we shouldn't depend on it here)
+
+When V8 ships a breaking change to their C++ API that cannot be handled by `nan` there will be a *semver-major* version increase.
+
+When new features in the JavaScript language are introduced by V8, there will be a *semver-minor* version increase. TC39 has stated clearly that no backwards incompatible changes will be made to the language so it is appropriate to increase the *minor* rather than the *major*.
+
+Pull Requests that introduce post-ES5 mechanisms into the Node.js Core Library API require TSC review and approval. If landed, such changes must result in a *semver-major* version increase. However, Pull Requests may introduce post-ES5 mechanisms into the *internal* JavaScript implementation of the Core Library API so long as those mechanisms do not "bleed out" through the API.
+
+#### Other dependencies
+
+Other dependencies such as OpenSSL, libuv and http-parser are handled similarly.
+
+Node.js will continue to adopt new dependency releases as often as practically feasible.
+
+When a dependency ships a breaking change to their API, if that change can be abstracted by the Node.js Application Binary Interface such that module and application developers can be isolated from the change without breaking existing applications, there will be a *semver-minor* version increase.
+
+When a dependency ships a breaking change to their API that cannot be abstracted by the Node.js Application Binary Interface, there will be a *semver-major* version increase.
+
+When dependencies introduce additional functionality that does not break backwards compatibility in any way, there will be a *semver-minor* version increase.
+
 ## A Few Open Questions
 
 1. What about things like http_parser and libuv? Does it make sense to see about bringing each into the foundation as their own projects?
