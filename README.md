@@ -95,11 +95,13 @@ Patch releases are defined as bug, performance, and security fixes. They do not 
 
 Minors are the addition and refinements of APIs or subsystems. They do not change APIs or introduce backwards compatible breaking changes. These are mostly completely additive releases.
 
-The only exception to the versioning rules for Minors is when dealing with fixes for security vulnerabilities on Release branches other than master. For instance, if the current master is on major version 3.x, and a security vulnerability is discovered within the the 2.x release stream, then any fix for the security vulnerability, regardless of whether the fix introduces a backwards compatible breaking change, must result in a Minor version increase within the 2.x release stream (i.e. if the highest version in the 2.x stream was 2.6.7, then the security fix would cause the stream to bump to 2.7.0.) and the change in behavior must be clearly documented within the Pull Request.
-
 #### Majors
 
 Majors contain changes in behavior that could potentially break code that worked in prior releases.
+
+#### Post-Release Metadata
+
+LTS Releases are tagged with additional `~Major.Minor.Patch` metadata used to track post-release modifications to the LTS Release. LTS Candidates are tagged with additional '-rc.x' metadata where the `x` indicates a specific Candidate number. This additional metadata is managed solely by the LTS WG. Every new LTS Release is automatically tagged with the extension `~0.0.0` to indicate it's status as an LTS Release (Note: this replaces the current convention of using the `-release` extension to flag releases)
 
 ### Release Process for Master
 
@@ -143,21 +145,31 @@ Note: The specific details for how the organization will be created (e.g. if it 
 
 All Interim and Post-Convergence Releases other than current automatically shift into the responsibility of the Long Term Support working group. The specific approach for determining the LTS strategy for specific releases is entirely in the LTS WG’s hands.
 
-Every Major Release creates an opportunity to establish a new Long Term Support tag. For instance, suppose the master branch has a Major version bump to 2.0. The LTS WG can decide that there will be a LTS release in the 2.x stream. Any Minor release can be declared as an "LTS Candidate". Sufficient time should then be given to allow the branch to be reviewed and tested. Numerous Patch versions may occur during this time. Once the LTS WG is satisfied that the LTS Candidate is stable, it would cut the new LTS tag. It's possible that Minor version increases will occur in master while testing and reviewing the LTS Candidate.
+#### One Possible LTS Strategy:
+
+Every Release Branch creates an opportunity to establish a new Long Term Support tag. For instance, suppose the master branch is at version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0.x-rc.1` tag where `x` is the current patch level. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the `2.0.x` version becomes the LTS Release. If, after testing, it becomes apparent that additional patches or even minor bumps become necessary, the LTS Candidate can be shifted and new `2.y.x-rc.2` tag created where `y` is the current minor and `x` is the current patch. LTS Releases are identified by appending a `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
 
 Example:
-* Major version increased to 2.0.0
-* LTS WG declares that 2.0.0 is an LTS Candidate
-* Zero or more Patches on 2.0.x occur such that the current version is 2.0.10
-* LTS WG declares that 2.0.10 is the LTS Version
+* Major version rolls over to 2.0.0
+* LTS WG declares that there will be an LTS Release in the 2.0.x stream.
+* Several Patches on 2.0.x occur such that the current version is 2.0.10
+* The LTS WG feels that 2.0.10 is stable so it cuts the 2.0.10-rc.1 tag.
+* Additional testing shows no significant issues with 2.0.10-rc.1 so 2.0.10 is declared to be the LTS Release.
+* The 2.0.10~0.0.0 tag is created.
+* Later on, bugs are discovered in the LTS branch that need to be fixed. A Minor bump and several Patches are commited making the updated LTS version 2.0.10~0.1.5
 
 Example:
-* Major version increased to 2.5.0
-* LTS WG declares that 2.5.0 is an LTS Candidate
-* Zero or more Patches on 2.5.x occur such that the current version is 2.5.6
-* A PR occurs that forces a Minor version increase to 2.6.0,
-* The LTS WG decides to include the Minor increase in the LTS, 2.6.0 becomes the new LTS Candidate
-* LTS WG declares that 2.6.1 is the LTS Version
+* Major+Minor version rolls over to 2.5.0
+* LTS WG declares that there will be an LTS Release in the 2.5.x stream.
+* Several Patches on 2.5.x occur such that the current version is 2.5.6
+* A PR occurs that rolls a Minor version increase to 2.6.0,
+* The LTS WG decides to include the Minor increase in the LTS so that 2.6.x becomes the new LTS Candidate
+* A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6.2-rc.1 tag.
+* Additional testing shows no significant issues with 2.6.2-rc.1 so 2.6.2 is declared to by the LTS Release.
+* The 2.6.2~0.0.0 tag is created.
+* Later on, a major security vulnerability in the LTS branch is discovered. The fix requires a backwards compatible breaking change in, forcing a Major bump in the Post release metadata. The 2.6.2~1.0.0 tag is created to reflect the change.
+
+The goal here is to allow LTS Releases to be cut organically without impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
 
 TODO: Form LTS WG and create LTS policy.
 
