@@ -233,9 +233,9 @@ APIs and default behaviors in the Node.js Core Library, Application Binary Inter
 
 ### Platform Stability
 
-The Platforms supported by the Node.js project are divided in four distinct categories: *Primary*, *Secondary*, *Experimental* and *Deprecated*.
+The Platforms supported by the Node.js project are generally divided in four distinct categories: *Primary*, *Secondary*, *Experimental* and *Deprecated*.
 
-*Primary* Platforms consist of those supported by LTS Releases. These are the Platforms on which Node.js must not break and for which LTS Releases must be fully operational with no regressions. The list of Primary Platforms is managed by the TSC.
+*Primary* Platforms consist of those supported in LTS Releases. These are the Platforms on which Node.js must not break and for which subsequent LTS Releases must be fully operational with no regressions.
 
 *Secondary* Platforms consist of those with support in the master branch. Breaking changes to Secondary Platforms should be avoided but LTS Releases can be cut that omit support for Secondary Platforms.
 
