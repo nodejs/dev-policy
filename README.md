@@ -193,7 +193,7 @@ When discussing stability, it is important to first review Node.js' layered arch
    +---------------------------------------------------+
    |          Module and Application Ecosystem         |
    +---------------------------------------------------+
-        |                |    |           |          |
+        |                |            |              |
         |                | +----------------------+  |
         |                | |  Native Abstractions |  |
         |                | |      for Node.js     |  |
@@ -217,7 +217,7 @@ When discussing stability, it is important to first review Node.js' layered arch
         +---------------------------------------+
 ```
 
-Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`nan`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
+Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`NAN`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
 
 Due to the existing layering, modules and applications are sensitive not only to changes in the Core Library API, but the Application Binary Interface and dependendencies as well.
 
@@ -227,9 +227,9 @@ Any *backwards incompatible* change to either the Node.js Core Library API or Ap
 
 Issue: Should any modification to the ABI or Dependencies that requires module or application developers to recompile force a *semver-major* change?
 
-APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and nan must not change within LTS Releases unless the change is required to address a critical security update.  
+APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and NAN must not change within LTS Releases unless the change is required to address a critical security update.  
 
-Note that default or assumed behaviors and values are exposed via the API, ABI or Dependencies are considered to be part of the API. A change in a default value, for instance, counts as an API change as modules and applications may be written to assume certain defaults and could be broken.
+Default values or assumed behaviors that could cause modules or applications to break if modified are considered part of the API. This is a gray area, however.
 
 ### Dependency Stability
 
@@ -237,13 +237,13 @@ Note that default or assumed behaviors and values are exposed via the API, ABI o
 
 Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be supported and fully operational on all platforms officially targeted for support.
 
-When V8 ships a breaking change to their C++ API that can be handled by `nan` there will be a *semver-minor* version increase.
+When V8 ships a breaking change to their C++ API that can be handled by `NAN` there will be a *semver-minor* version increase.
 
-When V8 ships a breaking change to their C++ API that cannot be handled by `nan` there will be a *semver-major* version increase.
+When V8 ships a breaking change to their C++ API that cannot be handled by `NAN` there will be a *semver-major* version increase.
 
 When new features in the JavaScript language are introduced by V8, there will be a *semver-minor* version increase. TC39 has stated clearly that no backwards incompatible changes will be made to the language so it is appropriate to increase the *minor* rather than the *major*.
 
-Pull Requests that introduce post-ES5 mechanisms into the Node.js Core Library API require TSC review and approval. If landed, such changes must result in a *semver-major* version increase. However, Pull Requests may introduce post-ES5 mechanisms into the *internal* JavaScript implementation of the Core Library API so long as those mechanisms do not "bleed out" through the API.
+The Node.js Core Library API is currently built around ES5 Language features. While there are currently no plans to do so, it is possible for post-ES5 JavaScript language features to be introduced into the Core Library API in the future. If such changes can be introduced in a manner that is transparent to module and application developers and will not cause existing applications to break, the changes can be landed after sufficient review with either a *semver-patch* or *semver-minor* version increase (depending on whether the change introduces new APIs). However, if the changes cause a backwards incompatible change to the existing API or could cause existing modules and applications to break the change must be reviewed and approved by the TSC and must result in a *semver-major* version increase.
 
 #### Other dependencies
 
@@ -256,6 +256,10 @@ When a dependency ships a breaking change to their API, if that change can be ab
 When a dependency ships a breaking change to their API that cannot be abstracted by the Node.js Application Binary Interface, there will be a *semver-major* version increase.
 
 When dependencies introduce additional functionality that does not break backwards compatibility in any way, there will be a *semver-minor* version increase.
+
+#### npm
+
+While the `npm` utility is shipped as part of Node.js, it is not a functional dependency in the same way as V8, OpenSSL or libuv. Specifically, `npm` is not considered part of the Node.js API. As a general rule, *semver-patch* and *semver-minor* updates in `npm` may be introduced into Node.js with only a *semver-patch* version increase. If there is a *semver-major* update in `npm`, such as when `npm` rolls over to version 3.0.0, then a *semver-major* version increase should occur in Node.js. However, the TSC may alter this policy in the future depending on the nature and scope of changes expected in newer versions of `npm`.
 
 ## A Few Open Questions
 
