@@ -127,7 +127,7 @@ ____|____/               :                  \______|_____
        (node.js) v0.12.x :  v0.13.x  v0.14.x
 ```
 
-At the time of this writing, the current Node.js release is v0.12.2. The current io.js release is 1.6.3.
+At the time of this writing, the current Node.js release is v0.12.2. The current io.js release is 1.6.4.
 
 Upon Foundation launch, both projects will come together under a single TSC, but the two distinct release lines will continue independently for the near term. Each subsequent release ("interim releases") for each project should incrementally bring the two code bases closer together, allowing them to eventually merge back into a single Node.js 2.0 release line. For purposes of managing each separate release line, the TSC will charter an io.js WG and a node.js WG, each responsible for their respective release lines. The membership for each release line WG will be the current membership of each of the two separate projects TSC’s.
 
