@@ -217,7 +217,7 @@ When discussing stability, it is important to first review Node.js' layered arch
         +---------------------------------------+
 ```
 
-Node.js currently builds on top of several key dependencies including the V8 Javascript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`NAN`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
+Node.js currently builds on top of several key dependencies including the V8 JavaScript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`NAN`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
 
 Due to the existing layering, modules and applications are sensitive not only to changes in the Core Library API, but the Application Binary Interface and dependendencies as well.
 
@@ -227,15 +227,29 @@ Any *backwards incompatible* change to either the Node.js Core Library API or Ap
 
 Issue: Should any modification to the ABI or Dependencies that requires module or application developers to recompile force a *semver-major* change?
 
+Node.js implements a number of default values and assumed behaviors. Some of these may be intended for module and application developers to take advantage of while others may not. As a general rule, if a given default value or assumed behavior is *documented* within the end-user API documentation, it should be considered part of the public API. When modifying such defaults, Collaborators should use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be".
+
 APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and NAN must not change within LTS Releases unless the change is required to address a critical security update.  
 
-Default values or assumed behaviors that could cause modules or applications to break if modified are considered part of the API. This is a gray area, however.
+### Platform Stability
+
+The Platforms supported by the Node.js project are divided in four distinct categories: *Primary*, *Secondary*, *Experimental* and *Deprecated*.
+
+*Primary* Platforms consist of those supported by LTS Releases. These are the Platforms on which Node.js must not break and for which LTS Releases must be fully operational with no regressions. The list of Primary Platforms is managed by the TSC.
+
+*Secondary* Platforms consist of those with support in the master branch. Breaking changes to Secondary Platforms should be avoided but LTS Releases can be cut that omit support for Secondary Platforms.
+
+*Experimental* Platforms consist of those for which there is active ongoing development to port Node.js to the platform but functionality may not yet be feature complete or fully operational. Support for experimental platforms may not yet have been committed to *master* and might be done in a Development branch or separate repository entirely. The goal for Experimental Platforms would be for them to eventually graduate to *Secondary* Platforms.
+
+*Secondary* and *Experimental* Platforms remain active so long as there are Collaborators actively maintaining support for them.
+
+*Deprecated* Platforms consist of prior *Primary*, *Secondary* or *Experimental* Platforms that are no longer under active development and are no longer supported by active Collaborators. Only the TSC can decide to move a *Primary* platform to *Deprecated* status.
 
 ### Dependency Stability
 
 #### JavaScript Support (V8)
 
-Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be supported and fully operational on all platforms officially targeted for support.
+Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be fully functional with no regressions on all *Primary* Platforms.
 
 When V8 ships a breaking change to their C++ API that can be handled by `NAN` there will be a *semver-minor* version increase.
 
@@ -243,7 +257,7 @@ When V8 ships a breaking change to their C++ API that cannot be handled by `NAN`
 
 When new features in the JavaScript language are introduced by V8, there will be a *semver-minor* version increase. TC39 has stated clearly that no backwards incompatible changes will be made to the language so it is appropriate to increase the *minor* rather than the *major*.
 
-The Node.js Core Library API is currently built around ES5 Language features. While there are currently no plans to do so, it is possible for post-ES5 JavaScript language features to be introduced into the Core Library API in the future. If such changes can be introduced in a manner that is transparent to module and application developers and will not cause existing applications to break, the changes can be landed after sufficient review with either a *semver-patch* or *semver-minor* version increase (depending on whether the change introduces new APIs). However, if the changes cause a backwards incompatible change to the existing API or could cause existing modules and applications to break the change must be reviewed and approved by the TSC and must result in a *semver-major* version increase.
+With a few notable exceptions, the Node.js Core Library API is largely built around ES5 Language features. While there are currently no plans to do so, it is possible for post-ES5 JavaScript language features to be introduced into the Core Library API in the future. If such changes can be introduced in a manner that is transparent to module and application developers and will not cause existing applications to break, the changes can be landed after sufficient review with either a *semver-patch* or *semver-minor* version increase (depending on whether the change introduces new APIs). However, if the changes cause a backwards incompatible change to the existing API or could cause existing modules and applications to break the change must be reviewed and approved by the TSC and must result in a *semver-major* version increase.
 
 #### Other dependencies
 
