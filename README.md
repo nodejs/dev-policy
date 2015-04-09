@@ -28,7 +28,7 @@ Individuals can be nominated as Collaborators by TSC members. Once the nominatio
 
 Nominations for Collaborator Status happen through the typical TSC decision making process. That is, to nominate one or more Collaborators, an issue containing the names of all collaborators being nominated is created and put on the TSC meeting agenda. The issue is approved or rejected following the same Consensus Seeking Process used for any other issue or PR.
 
-Individuals can self-nominate the TSC for Collaborator status by submitting an issue requesting to be put on the TSC meeting agenda. In order to be considered however, such self-nominations must be sponsored by an existing TSC member, after which it follows the same process as above. To sponsor a nomination, the TSC member must indicate consent within the issue text or associated comment thread.
+Individuals can self-petition the TSC for Collaborator status by submitting an issue requesting to be put on the TSC meeting agenda. In order to be considered however, such self-nominations must be sponsored by an existing TSC member, after which it follows the same process as above. To sponsor a nomination, the TSC member must indicate consent within the issue text or associated comment thread.
 
 Collaborators can be nominated to become members of the TSC following the same nomination and approval model. However, Collaborators cannot nominate themselves for TSC membership. An individual cannot be nominated and accepted into the TSC without first having been nominated and accepted as a Collaborator.
 
@@ -56,9 +56,19 @@ All Pull Requests that either fix bugs or introduce new functionality require at
 
 Pull Requests for changes intended to improve performance require a benchmark demonstrating the performance impact. The benchmark should demonstrate improved performance after the change is applied.
 
-### Branches
+### Branching Model
 
 The Project source repository will be organized into a single *master* branch, multiple Release branches, and multiple Development Branches. All modifications intended for the current major release line must be made to the *master* branch and must follow the guidelines detailed in this document. Modifications to Release branches are limited to bug fixes, with priority given to changes that address specific security vulnerabilities. Oversight of the Release branches belongs to the Long Term Support (LTS) Working Group. The LTS Working Group will establish policies for landing Pull Requests into Release branches.
+
+```
+          (dev branches)        (dev branches)
+          /  /      \  \        /  /      \  \
+  ---------------------------------------------------------------> master
+      \          \          \          \          \          \
+      x.0        x.1        x.2       x+1.0      x+1.1     x+1.2   (releases)
+
+```
+
 
 ### Landing Pull Requests
 
@@ -169,31 +179,58 @@ The LTS WG is expected to establish a regular and predictable cadence of stable 
 
 Note: this is a strawman meant to stimulate discussion. Feel free to knock it down. See https://github.com/jasnell/dev-policy/issues/15 and https://github.com/jasnell/dev-policy/issues/26 for additional discussion.
 
-Every Release Branch creates an opportunity to establish a new Long Term Support tag. For instance, suppose the master branch is at version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0.x-rc.1` tag where `x` is the current patch level. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the `2.0.x` version becomes the LTS Release. If, after testing, it becomes apparent that additional patches or even minor bumps become necessary, the LTS Candidate can be shifted and new `2.y.x-rc.2` tag created where `y` is the current minor and `x` is the current patch. LTS Releases are identified by appending a `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
+The *master* branch must always be in a production-ready state. Features landed must be complete and functional.
+
+Every Release Branch creates an opportunity to establish a new Long Term Support release. For instance, suppose the master branch rolls to version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0.x-rc.1` tag where `x` is the current patch level. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the `2.0.x` version becomes the LTS Release. If, after testing, it becomes apparent that additional patches or even minor bumps become necessary, the LTS Candidate can be shifted and new `2.y.x-rc.2` tag created where `y` is the current minor and `x` is the current patch. LTS Releases are identified by appending a `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
+
+Once the `-rc.1` tag is cut at a particular point, the master stream goes into "Feature Freeze" until the release branch is cut. New features landed before the `-rc.1` tag make it into the LTS Release, those that do not must wait to land until after the Feature Freeze is lifted.
 
 Example:
-* Major version rolls over to 2.0.0
 * LTS WG declares that there will be an LTS Release in the 2.0.x stream.
+* Major version rolls over to 2.0.0
+* 2.0.0 is tagged as 2.0.0-rc.1, Feature Freeze on master begins
 * Several Patches on 2.0.x occur such that the current version is 2.0.10
-* The LTS WG feels that 2.0.10 is stable so it cuts the 2.0.10-rc.1 tag.
-* Additional testing shows no significant issues with 2.0.10-rc.1 so 2.0.10 is declared to be the LTS Release.
-* The 2.0.10~0.0.0 tag is created.
+* The LTS WG feels that 2.0.10 is stable so it cuts the 2.0.10-rc.2 tag.
+* Additional testing shows no significant issues with 2.0.10-rc.2 so 2.0.10 is declared to be the LTS Release.
+* The 2.0.10~0.0.0 branch is created off 2.0.10, Feature Freeze on master is lifted.
 * Later on, bugs are discovered in the LTS branch that need to be fixed. A Minor bump and several Patches are commited making the updated LTS version 2.0.10~0.1.5
 
+```
+     +----------------------------------+
+     |      LTS feature freeze          |
+  -------------------------------------------------------> master
+     \  .......................... \
+    2.0.0                        2.0.10 -----------------> (LTS stream)
+      |                           |      \          \
+      |                           |    ~0.0.0     ~x.y.z
+  tag:2.0.10-rc.1           tag:2.0.10-rc.2
+```
+
 Example:
-* Major+Minor version rolls over to 2.5.0
 * LTS WG declares that there will be an LTS Release in the 2.5.x stream.
+* Major+Minor version rolls over to 2.5.0
+* 2.5.0 is tagged as tag:2.5.0-rc.1, Feature Freeze on master begins
 * Several Patches on 2.5.x occur such that the current version is 2.5.6
-* A PR occurs that rolls a Minor version increase to 2.6.0,
+* A PR comes in that would roll a Minor version increase to 2.6.0,
 * The LTS WG decides to include the Minor increase in the LTS so that 2.6.x becomes the new LTS Candidate
-* A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6.2-rc.1 tag.
-* Additional testing shows no significant issues with 2.6.2-rc.1 so 2.6.2 is declared to by the LTS Release.
-* The 2.6.2~0.0.0 tag is created.
+* 2.6.0 is tagged as 2.6.0-rc.2
+* A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6.2-rc.3 tag.
+* Additional testing shows no significant issues with 2.6.2-rc.2 so 2.6.2 is declared to be the LTS Release.
+* The 2.6.2~0.0.0 branch is created off 2.6.2, Feature Freeze on master is lifted.
 * Later on, a major security vulnerability in the LTS branch is discovered. The fix requires a backwards compatible breaking change in, forcing a Major bump in the Post release metadata. The 2.6.2~1.0.0 tag is created to reflect the change.
 
-The goal here is to allow LTS Releases to be cut organically without impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
+```
+     +------------------------------------------+
+     |          LTS feature freeze              |
+  -------------------------------------------------------> master
+     \  ............ \ ....... \ ......... \
+    2.5.0           2.5.6    2.6.0        2.6.2 ---------> (LTS stream)
+      |                        |           |     \      \
+  tag:2.5.0-rc.1        tag:2.6.2-rc.2     |   ~0.0.0 ~1.0.0
+                                     tag:2.6.0-rc.3
+```
 
-TODO: Form LTS WG and create LTS policy.
+The goal here is to allow LTS Releases to be cut organically without adversely impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
 
 ## Issues Workflow
 
