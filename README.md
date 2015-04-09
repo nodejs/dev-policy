@@ -171,7 +171,7 @@ Note: The specific details for how the organization will be created (e.g. if it 
 
 ## Long Term Support
 
-All Interim and Post-Convergence Releases other than current automatically shift into the responsibility of the Long Term Support working group. The specific approach for determining the LTS strategy for specific releases is entirely in the LTS WG’s hands.
+All Releases branches automatically shift into the responsibility of the Long Term Support working group. Determination of the LTS strategy for specific releases the responsibility of the LTS WG.
 
 The LTS WG is expected to establish a regular and predictable cadence of stable releases. To this end, the LTS WG must maintain and regularly publish a clear Roadmap that outlines the priorities and milestones for upcoming LTS Releases. The goal of the Roadmap is to help guide the project's evolution as opposed to constraining it.
 
@@ -215,7 +215,7 @@ Example:
 * The LTS WG decides to include the Minor increase in the LTS so that 2.6.x becomes the new LTS Candidate
 * 2.6.0 is tagged as 2.6.0-rc.2
 * A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6.2-rc.3 tag.
-* Additional testing shows no significant issues with 2.6.2-rc.2 so 2.6.2 is declared to be the LTS Release.
+* Additional testing shows no significant issues with 2.6.2-rc.3 so 2.6.2 is declared to be the LTS Release.
 * The 2.6.2~0.0.0 branch is created off 2.6.2, Feature Freeze on master is lifted.
 * Later on, a major security vulnerability in the LTS branch is discovered. The fix requires a backwards compatible breaking change in, forcing a Major bump in the Post release metadata. The 2.6.2~1.0.0 tag is created to reflect the change.
 
@@ -227,7 +227,7 @@ Example:
     2.5.0           2.5.6    2.6.0        2.6.2 ---------> (LTS stream)
       |                        |           |     \      \
   tag:2.5.0-rc.1        tag:2.6.2-rc.2     |   ~0.0.0 ~1.0.0
-                                     tag:2.6.0-rc.3
+                                     tag:2.6.2-rc.3
 ```
 
 The goal here is to allow LTS Releases to be cut organically without adversely impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
@@ -288,7 +288,7 @@ Any API *addition* to either the Node.js Core Library API or Application Binary 
 
 Any *backwards incompatible* change to either the Node.js Core Library API or Application Binary Interface must result in a *semver-major* version increase.
 
-Issue: Should any modification to the ABI or Dependencies that requires module or application developers to recompile force a *semver-major* change?
+Issue: Should any modification to the ABI, Dependencies or Native abstractions that require module or application developers to recompile force a *semver-major* change? What about if it's just a recompile and not a code change?
 
 Node.js implements a number of default values and assumed behaviors. Some of these may be intended for module and application developers to take advantage of while others may not. As a general rule, if a given default value or assumed behavior is *documented* within the end-user API documentation, it should be considered part of the public API. When modifying such defaults, Collaborators should use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be".
 
@@ -300,7 +300,7 @@ The Platforms supported by the Node.js project are generally divided into four d
 
 *Primary* Platforms consist of those supported in LTS Releases. These are the Platforms on which Node.js must not break and for which subsequent LTS Releases must be fully operational with no regressions.
 
-*Secondary* Platforms consist of those with support in the master branch. Breaking changes to Secondary Platforms should be avoided but LTS Releases can be cut that omit support for Secondary Platforms.
+*Secondary* Platforms consist of those with support in the master branch but have not yet been included in an LTS Release.
 
 *Experimental* Platforms consist of those for which there is active ongoing development to port Node.js to the platform but functionality may not yet be feature complete or fully operational. Support for experimental platforms may not yet have been committed to *master* and might be done in a Development branch or separate repository entirely. The goal for Experimental Platforms would be for them to eventually graduate to *Secondary* Platforms.
 
