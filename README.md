@@ -258,8 +258,8 @@ When discussing stability, it is important to first review Node.js' layered arch
    +---------------------------------------------------+
         |                |            |              |
         |                | +----------------------+  |
-        |                | |  Native Abstractions |  |
-        |                | |      for Node.js     |  |
+        |                | |  Binary Abstraction  |  |
+        |                | |        Layer         |  |
         |                | +----------------------+  |
         |                |     |             |       |
    +----------------+    |     |             |       /
@@ -280,7 +280,7 @@ When discussing stability, it is important to first review Node.js' layered arch
         +---------------------------------------+
 ```
 
-Node.js currently builds on top of several key dependencies including the V8 JavaScript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Native Abstractions for Node.js (`NAN`) is binary abstraction layer used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
+Node.js currently builds on top of several key dependencies including the V8 JavaScript engine, libuv, openssl and others. The Node.js Application Binary Interface provides critical functionality such as the Event Loop which critical to how Node.js operates. The Node.js Core Library is the primary interface through which most Modules and Applications built on top of Node perform I/O operations, manipulate data, access the network, etc. Some modules and applications, however, go beyond the Core Library and bind directly to the Application Binary Interface and dependencies to perform more advanced operations. The Binary abstraction layer is used to buffer module and application developers from changes in the Application Binary Interface and Dependencies.
 
 Due to the existing layering, modules and applications are sensitive not only to changes in the Core Library API, but the Application Binary Interface and dependendencies as well.
 
@@ -292,11 +292,11 @@ Issue: Should any modification to the ABI or Dependencies that requires module o
 
 Node.js implements a number of default values and assumed behaviors. Some of these may be intended for module and application developers to take advantage of while others may not. As a general rule, if a given default value or assumed behavior is *documented* within the end-user API documentation, it should be considered part of the public API. When modifying such defaults, Collaborators should use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be".
 
-APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and NAN must not change within LTS Releases unless the change is required to address a critical security update.  
+APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and binary abstractions must not change within LTS Releases unless the change is required to address a critical security update.  
 
 ### Platform Stability
 
-The Platforms supported by the Node.js project are generally divided in four distinct categories: *Primary*, *Secondary*, *Experimental* and *Deprecated*.
+The Platforms supported by the Node.js project are generally divided into four distinct categories: *Primary*, *Secondary*, *Experimental* and *Deprecated*.
 
 *Primary* Platforms consist of those supported in LTS Releases. These are the Platforms on which Node.js must not break and for which subsequent LTS Releases must be fully operational with no regressions.
 
@@ -314,9 +314,9 @@ The Platforms supported by the Node.js project are generally divided in four dis
 
 Node.js will adopt new V8 releases as quickly as practically feasible. For LTS Releases, the version of V8 shipped must be fully functional with no regressions on all *Primary* Platforms.
 
-When V8 ships a breaking change to their C++ API that can be handled by `NAN` there will be a *semver-minor* version increase.
+When V8 ships a breaking change to their C++ API that can be handled by the binary abstraction layer there will be a *semver-minor* version increase.
 
-When V8 ships a breaking change to their C++ API that cannot be handled by `NAN` there will be a *semver-major* version increase.
+When V8 ships a breaking change to their C++ API that cannot be handled by the binary abstract layer there will be a *semver-major* version increase.
 
 When new features in the JavaScript language are introduced by V8, there will be a *semver-minor* version increase. TC39 has stated clearly that no backwards incompatible changes will be made to the language so it is appropriate to increase the *minor* rather than the *major*.
 
@@ -349,4 +349,6 @@ While the `npm` utility is shipped as part of Node.js, it is not a functional de
 
 2. The existing Node.js Workflow requires that all PR's can only be landed using a specific Jenkin's "node-accept-pull-request" job. This document requires that all PR's must be tested to ensure that all tests pass but it does not go into specific detail on the CI process. It is expected that a Release Working Group will establish the specific step-by-step process by which Pull Requests must be landed.
 
-3. The existing Node.js Workflow recently introduced the notion of "Priority" and "Status" tags for Issues. For instance, the *P-0* tag can be used to label issues that break node on at least one supported platform and need to be resolved as quickly as possible. The intent of the Priority tags is to assist in the triage of issues and help Collaborators determine which issues to work on first. The io.js project currently does not have a similar mechanism and feedback from io.js participants has been that such a Priority tagging system may not be of use given the way they've chosen to handle issues.
+3. The existing Node.js Workflow recently introduced the notion of "Priority" and "Status" tags for Issues. For instance, the *P-0* tag can be used to label issues that break node on at least one supported platform and need to be resolved as quickly as possible. The intent of the Priority tags is to assist in the triage of issues and help Collaborators determine which issues to work on first. The io.js project currently does not have a similar mechanism and feedback from io.js participants has been that such a Priority tagging system may not be of use (and could be actively harmful) given the way they've chosen to handle issues.
+
+4. Within io.js, the Binary Abstraction Layer of choice is currently `NAN`. Several of the Node.js contributors are not yet sure if `NAN` is the right choice. This will need to be decided at some point. For now, I've abstracted the abstraction layer in this document.
