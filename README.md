@@ -38,7 +38,7 @@ A "Contribution" to the Project is any work that is voluntarily submitted to the
 
 Contributions to the Project are made on a collaborative basis. Any individual with a GitHub account may propose a Contribution by submitting a Pull Request (PR). Like the TSC governance, acceptance of Contributions (a.k.a. "landing a Pull Request") into the Project follows the Consensus Seeking decision making model as described in the Project TSC Charter.
 
-All Pull Requests submitted by individuals who are not Collaborators must be signed-off on by an existing Collaborator before the PR will be considered. The sponsoring Collaborator becomes responsible for the PR. Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator.
+All Pull Requests submitted by individuals who are not Collaborators must be signed-off on by an existing Collaborator before the PR can be landed. The sponsoring Collaborator becomes responsible for the PR. Pull Requests from an existing Collaborator must be signed-off on by at least one other Collaborator.
 
 Before any Pull Request is landed, sufficient time should be given to receive input from other Collaborators with sufficient expertise to evaluate the changes. Specifically, at least 48 hours during the typical working week and 72 hours over weekends should be given to account for international time differences and work schedules. Trivial Pull Requests may be landed after a shorter delay.
 
