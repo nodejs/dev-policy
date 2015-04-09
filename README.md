@@ -8,7 +8,7 @@ It is vital that users trust the Contributors to have their best interests in mi
 
 Adoption of new capabilities and features within Node.js must be carefully balanced by the expressed needs of the users and the community. Change just for the sake of change must be avoided and a guaranteed long term support policy must be established.
 
-Node.js owes much of it's success to the existing ecosystem of module and add-on developers. The Node.js project should do everything it can to support the continued growth and stability of that ecosystem.
+Node.js owes much of it's success to the existing ecosystem of module and add-on developers. The Node.js project should do everything it can to support the continued growth and stability of that ecosystem. This includes, but is not limited to, keeping Node.js focused on providing a minimal kernel of core functionality while deferring, as much as possible, additional capabilities and features to add-on modules or applications.
 
 In order to best serve the Node.js Community as a whole, the development, release and issue management processes adopted by the Node.js Foundation TSC must reflect these guiding principles.
 
