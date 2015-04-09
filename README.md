@@ -159,11 +159,15 @@ The Converged repository must contain release branches for all prior stable line
 
 Note: The specific details for how the organization will be created (e.g. if it would be a brand new organization or a migration of one or both of the existing organizations) has yet to be determined. This is a complex issue that will require careful thought. It will be the responsibility of the Convergence WG to determine the specific details.
 
-### Long Term Support WG
+## Long Term Support
 
 All Interim and Post-Convergence Releases other than current automatically shift into the responsibility of the Long Term Support working group. The specific approach for determining the LTS strategy for specific releases is entirely in the LTS WG’s hands.
 
-#### One Possible LTS Strategy:
+The LTS WG is expected to establish a regular and predictable cadence of stable releases. To this end, the LTS WG must maintain and regularly publish a clear Roadmap that outlines the priorities and milestones for upcoming LTS Releases. The goal of the Roadmap is to help guide the project's evolution as opposed to constraining it.
+
+### Strawman LTS Strategy:
+
+Note: this is a strawman meant to stimulate discussion. Feel free to knock it down. See https://github.com/jasnell/dev-policy/issues/15 and https://github.com/jasnell/dev-policy/issues/26 for additional discussion.
 
 Every Release Branch creates an opportunity to establish a new Long Term Support tag. For instance, suppose the master branch is at version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0.x-rc.1` tag where `x` is the current patch level. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the `2.0.x` version becomes the LTS Release. If, after testing, it becomes apparent that additional patches or even minor bumps become necessary, the LTS Candidate can be shifted and new `2.y.x-rc.2` tag created where `y` is the current minor and `x` is the current patch. LTS Releases are identified by appending a `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
 
@@ -190,6 +194,10 @@ Example:
 The goal here is to allow LTS Releases to be cut organically without impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
 
 TODO: Form LTS WG and create LTS policy.
+
+## Issues Workflow
+
+The tracking and management of issues is still an open discussion. See https://github.com/jasnell/dev-policy/issues/9 and https://github.com/jasnell/dev-policy/issues/8
 
 ## Developer's Certificate of Origin 1.0
 
