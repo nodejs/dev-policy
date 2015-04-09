@@ -1,4 +1,22 @@
-**NOTE** : This is a work in progress draft of a proposed dev and release policy for the Node.js Foundation TSC. This document currently has no official standing within the Node.js or io.js projects or Node.js Foundation. The intent for this draft to be put up for discussion in a joint Node.js and io.js TC meeting on Thursday, April 9th, 2015.
+## Guiding Principles
+
+The Fundamental goal of the Node.js Project is to provide a JavaScript-based application development platform that is *current*, *reliable* and *stable*.
+
+Contributors to Node.js work in concert with one another *on behalf of* the Community of users who build their applications and businesses on top of the Node.js platform. Accordingly, contributors must demonstrate an ongoing commitment, not only to the Project, but to the stability and vitality of the Community as a whole.
+
+It is vital that users trust the Contributors to have their best interests in mind while making decisions affecting the overall direction of the platform. This means having defined guidelines, stable APIs, a clear roadmap, and a predictable release schedule. The user community and developer ecosystem must be included in the decision making process.
+
+Adoption of new capabilities and features within Node.js must be carefully balanced by the expressed needs of the users and the community. Change just for the sake of change must be avoided and a guaranteed long term support policy must be established.
+
+Node.js owes much of it's success to the existing ecosystem of module and add-on developers. The Node.js project should do everything it can to support the continued growth and stability of that ecosystem.
+
+In order to best serve the Node.js Community as a whole, the development, release and issue management processes adopted by the Node.js Foundation TSC must reflect these guiding principles.
+
+## About this document
+
+This document is a work in progress draft of a *proposed* development and release policy for the Node.js Foundation TSC. This document currently has no official standing within Node.js, io.js or the Node.js Foundation. The intent is for this draft to be put up for discussion in a joint Node.js and io.js TC meeting on Thursday, April 9th, 2015.
+
+Nothing within this document should currently be considered final.
 
 ## Contributing
 
