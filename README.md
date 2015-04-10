@@ -308,7 +308,7 @@ Backwards incompatible changes to *Implicit* APIs that have been included in a R
 
   (a) the proposed change reconciles *documented* behavior with *implemented* behavior (i.e. the documentation needs to be updated to accurately reflect how the code actually works);
   (b) it is clear that the Implicit API being modified was originally intended for internal use as part of the underlying implementation (as opposed to being targeted at developers); or
-  (d) it can be demonstrated that the Implicit API never worked correctly to begin with.
+  (c) it can be demonstrated that the Implicit API never worked correctly to begin with.
 
 That said, changes to any of the APIs should not be made lightly as there is no reliable means of determining in advance the impact any change may have on existing applications and modules. Collaborators must use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be", then approach landing the change accordingly.
 
