@@ -288,11 +288,27 @@ Any API *addition* to either the Node.js Core Library API or Application Binary 
 
 Any *backwards incompatible* change to either the Node.js Core Library API or Application Binary Interface must result in a *semver-major* version increase.
 
-Issue: Should any modification to the ABI, Dependencies or Native abstractions that require module or application developers to recompile force a *semver-major* change? What about if it's just a recompile and not a code change?
+Any Modification to the ABI, dependencies or Native abstractions that require a developer to *modify code* and then recompile is considered a backwards incompatible change that must result in a *semver-major* version increase.
 
-Node.js implements a number of default values and assumed behaviors. Some of these may be intended for module and application developers to take advantage of while others may not. As a general rule, if a given default value or assumed behavior is *documented* within the end-user API documentation, it should be considered part of the public API. When modifying such defaults, Collaborators should use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be".
+### Implicit vs. Explicit API Stability
 
-APIs and default behaviors in the Node.js Core Library, Application Binary Interface, Dependencies and binary abstractions must not change within LTS Releases unless the change is required to address a critical security update.  
+The Node.js Core Library API, Application Binary Interface and Binary Abstraction layer each expose methods, events, behaviors and default values that together comprise the implicit Node.js "Public API". This "Public API" is used  by application and module developers and changes will have direct impact on the Community.
+
+Methods exposed by the API can have either strongly or weakly types input parameters and return values. Methods may also throw any number of exceptions or trigger certain sequences of events or side effects. When such types, exceptions, events or side-effects are *documented*, they become part of the Node.js *Explicit API*.
+
+Likewise, when the ordering of events triggered by Node.js, the default values of optional input parameters and constants, or the type and structure of return values and event payloads are *documented*, they become part of the *Explicit API*.
+
+*Undocumented* types, return values, exceptions, events and side effects are considered to be part of the *Implicit API*.
+
+The ecosystem of application and module developers must be ale to rely on the stability of both *Implicit* and *Explicit* APIs as much as possible. Changes to these APIs that are made prior to their inclusion within a Release are generally straightforward and can be made with appropriate review. Changes after the APIs have been included within a Release, however, require Collaborators to be much more careful.
+
+Backwards incompatible changes to *Explicit* APIs that have previously been included in a Release *must* follow a clear and predictable deprecation process in which the existing documented API: (a) is clearly marked for deprecation and (b) can change only after the next *semver-major* version increase.
+
+Backwards incompatible changes to *Implicit* APIs that have been included in a Release *should* be handled the same as *Explicit* API changes. However, exception to this rule can be allowed if: (a) the proposed change can be reliably demonstrated to have minimal impact *in practice*, (b) the proposed change is intended to reconcile *implemented* behavior with *documented* behavior (i.e. the documentation says one thing but the code does another), or (c) it is clear that the Implicit API being modified had originally been intended for internal use as part of the underlying implementation as opposed to being targeted at developers.
+
+That said, changes to any of the APIs should not be made lightly as there is no reliable means of determining in advance the impact any change may have on existing applications and modules. Collaborators must use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be", then approach landing the change accordingly.
+
+There should never be any API change in an LTS Release unless the change is required to address a critical security vulnerability.  
 
 ### Platform Stability
 
