@@ -304,7 +304,11 @@ The ecosystem of application and module developers must be able to rely on the s
 
 Backwards incompatible changes to *Explicit* APIs that have previously been included in a Release *must* follow a clear and predictable deprecation process in which the existing documented API: (a) is clearly marked for deprecation and (b) can change only after the next *semver-major* version increase.
 
-Backwards incompatible changes to *Implicit* APIs that have been included in a Release *should* be handled the same as *Explicit* API changes. However, exception to this rule can be allowed if: (a) the proposed change can be reliably demonstrated to have minimal impact *in practice*, (b) the proposed change is intended to reconcile *implemented* behavior with *documented* behavior (i.e. the documentation says one thing but the code does another and either the code or documentation need to be updated), (c) it is clear that the Implicit API being modified had originally been intended for internal use as part of the underlying implementation as opposed to being targeted at developers, or (d) it can be demonstrated that the Implicit API never worked correctly to begin with.
+Backwards incompatible changes to *Implicit* APIs that have been included in a Release *should* be handled the same as *Explicit* API changes. However, exception to this rule can be allowed if the proposed change can be reliably demonstrated to have minimal impact *in practice* and either:
+
+  (a) the proposed change reconciles *documented* behavior with *implemented* behavior (i.e. the documentation needs to be updated to accurately reflect how the code actually works);
+  (b) it is clear that the Implicit API being modified was originally intended for internal use as part of the underlying implementation (as opposed to being targeted at developers); or
+  (c) it can be demonstrated that the Implicit API never worked correctly to begin with.
 
 That said, changes to any of the APIs should not be made lightly as there is no reliable means of determining in advance the impact any change may have on existing applications and modules. Collaborators must use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be", then approach landing the change accordingly.
 
