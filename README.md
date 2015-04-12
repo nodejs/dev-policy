@@ -52,7 +52,7 @@ Collaborators sign-off on a Pull Request by explicitly stating their approval in
 
 Exception to this process is allowed for high-priority changes that address security vulnerabilities. A shorter review period and modified sign-off process may be necessary depending on the nature of the change and severity of the issue. It is recommended that the TSC establish a Security Working Group of Collaborators with recognized security expertise that can be tasked with reviewing security related Pull Requests and determining an appropriate review process.
 
-All Pull Requests that either fix bugs or introduce new functionality require at least one test case demonstrating the defect or validating the intended functionality. For bug fixes, the test should fail before the change, and pass after the change. In exceptional cases, such as environments or failure modes that are difficult to reproduce, a detailed description of how to verify the fix may be accepted in lieu of a specific test. 
+All Pull Requests that either fix bugs or introduce new functionality require at least one test case demonstrating the defect or validating the intended functionality. For bug fixes, the test should fail before the change, and pass after the change. In exceptional cases, such as environments or failure modes that are difficult to reproduce, a detailed description of how to verify the fix may be accepted in lieu of a specific test.
 
 Pull Requests for changes intended to improve performance require a benchmark demonstrating the performance impact. The benchmark should demonstrate improved performance after the change is applied.
 
@@ -290,6 +290,8 @@ Any *backwards incompatible* change to either the Node.js Core Library API or Ap
 
 Any Modification to the ABI, dependencies or Native abstractions that require a developer to *modify code* and then recompile is considered a backwards incompatible change that must result in a *semver-major* version increase.
 
+Reversions of any changes landed into *mater* are to be handled just like any other type of pre- or post-release modification. Reversions that occur while generating a Release may happen only when a particular commit is interfering with the successful completion of the build, test and release process and the Release is intended to address a security vulnerability.
+
 ### Implicit vs. Explicit API Stability
 
 The Node.js Core Library API, Application Binary Interface and Binary Abstraction layer each expose methods, events, behaviors and default values that together comprise the implicit Node.js "Public API". This "Public API" is used  by application and module developers and changes will have direct impact on the Community.
@@ -307,10 +309,12 @@ Backwards incompatible changes to *Explicit* APIs that have previously been incl
 Backwards incompatible changes to *Implicit* APIs that have been included in a Release *should* be handled the same as *Explicit* API changes. However, exception to this rule can be allowed if the proposed change can be reliably demonstrated to have minimal impact *in practice* and either:
 
   (a) the proposed change reconciles *documented* behavior with *implemented* behavior (i.e. the documentation needs to be updated to accurately reflect how the code actually works);
+
   (b) it is clear that the Implicit API being modified was originally intended for internal use as part of the underlying implementation (as opposed to being targeted at developers); or
+
   (c) it can be demonstrated that the Implicit API never worked correctly to begin with.
 
-That said, changes to any of the APIs should not be made lightly as there is no reliable means of determining in advance the impact any change may have on existing applications and modules. Collaborators must use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be", then approach landing the change accordingly.
+That said, changes to any of the APIs should not be made lightly as there is currently no reliable means of determining in advance the impact any change may have on existing applications and modules. Collaborators must use their best judgement to determine whether any given change is "technically backwards incompatible but in practice should not be", then approach landing the change accordingly.
 
 There should never be any API change in an LTS Release unless the change is required to address a critical security vulnerability.  
 
@@ -326,7 +330,7 @@ The Platforms supported by the Node.js project are generally divided into four d
 
 *Secondary* and *Experimental* Platforms remain active so long as there are Collaborators actively maintaining support for them.
 
-*Deprecated* Platforms consist of prior *Primary*, *Secondary* or *Experimental* Platforms that are no longer under active development and are no longer supported by active Collaborators. Only the TSC can decide to move a *Primary* platform to *Deprecated* status.
+*Deprecated* Platforms consist of prior *Primary*, *Secondary* or *Experimental* Platforms that are no longer under active development and are no longer supported by active Collaborators. Only the TSC can decide to move a *Primary* platform to *Deprecated* status. Support for *Deprecated* Platforms may be removed entirely after the next *semver-major* version increase.
 
 ### Dependency Stability
 
