@@ -290,7 +290,7 @@ Any *backwards incompatible* change to either the Node.js Core Library API or Ap
 
 Any Modification to the ABI, dependencies or Native abstractions that require a developer to *modify code* and then recompile is considered a backwards incompatible change that must result in a *semver-major* version increase.
 
-Reversions of any changes landed into *mater* are to be handled just like any other type of pre- or post-release modification. Reversions that occur while generating a Release may happen only when a particular commit is interfering with the successful completion of the build, test and release process and the Release is intended to address a security vulnerability.
+Reversions of any changes landed into *master* are to be handled just like any other type of pre- or post-release modification.
 
 ### Implicit vs. Explicit API Stability
 
