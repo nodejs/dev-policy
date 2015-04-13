@@ -332,6 +332,16 @@ The Platforms supported by the Node.js project are generally divided into four d
 
 *Deprecated* Platforms consist of prior *Primary*, *Secondary* or *Experimental* Platforms that are no longer under active development and are no longer supported by active Collaborators. Only the TSC can decide to move a *Primary* platform to *Deprecated* status. Support for *Deprecated* Platforms may be removed entirely after the next *semver-major* version increase.
 
+### Build Stability
+
+The stability of the Node.js Build process and infrastructure is critical for those who rely on the ability to build Node.js from source as part of their deployment workflow. The ability to support Node.js on multiple platforms requires that Collaborators avoid making breaking changes that require new or updated compiler versions, new C/C++ language level features, etc.
+
+Pull Requests that introduce new build dependencies that are not currently supported by *Primary* platforms, or that cause backwards incompatible modifications to the build environment must be reviewed and approved by the TSC. Note that the TSC may choose to delegate review to a Working Group chartered to handle the Build environment.
+
+Here, "backwards incompatible" is considered relative to the *Primary* platforms supported by the most recent LTS Release. In other words, if the most recent LTS release supports a certain level of the Linux kernel on PowerPC Architecture, and a new Pull Request causes the build to break on that specific platform configuration, then it is considered a backwards compatible change.
+
+Minor changes to the build that can be made without breaking compatibility with *Primary* platforms can be made with appropriate review just like all other Pull Requests.
+
 ### Dependency Stability
 
 #### JavaScript Support (V8)
