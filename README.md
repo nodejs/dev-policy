@@ -181,56 +181,54 @@ Note: this is a strawman meant to stimulate discussion. Feel free to knock it do
 
 The *master* branch must always be in a production-ready state. Features landed must be complete and functional.
 
-Every Release Branch creates an opportunity to establish a new Long Term Support release. For instance, suppose the master branch rolls to version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0.x-rc.1` tag where `x` is the current patch level. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the `2.0.x` version becomes the LTS Release. If, after testing, it becomes apparent that additional patches or even minor bumps become necessary, the LTS Candidate can be shifted and new `2.y.x-rc.2` tag created where `y` is the current minor and `x` is the current patch. LTS Releases are identified by appending a `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
+Release Branches occur at every Major.Minor version bump (e.g. `2.0`, `2.1`, `2.2`, etc). Every Release Branch creates an opportunity to establish a new Long Term Support release.
 
-Once the `-rc.1` tag is cut at a particular point, the master stream goes into "Feature Freeze" until the release branch is cut. New features landed before the `-rc.1` tag make it into the LTS Release, those that do not must wait to land until after the Feature Freeze is lifted.
+For instance, suppose the master branch rolls to version `2.0.0`. The LTS WG can decide in advance that there will be an LTS release in the `2.0.x` stream. At any point, the LTS WG can declare any version within that stream to be an "LTS Candidate" by cutting a `2.0-rc.1` tag. Sufficient time should then be given to allow the tag to be reviewed and tested. If things look good, the tagged version becomes the LTS Release. If, after testing, it becomes apparent that additional patches become necessary, the LTS Candidate can be shifted and a new `2.0-rc.2` at a specific patch level.
+
+LTS Releases are identified by appending the extension `~0.0.0` to the version (i.e. `2.5.3~0.0.0`). This additional metadata identifies the post-release semantic versioning extension for the LTS release.
 
 Example:
 * LTS WG declares that there will be an LTS Release in the 2.0.x stream.
 * Major version rolls over to 2.0.0
-* 2.0.0 is tagged as 2.0.0-rc.1, Feature Freeze on master begins
+* 2.0.0 is tagged as 2.0-rc.1
 * Several Patches on 2.0.x occur such that the current version is 2.0.10
-* The LTS WG feels that 2.0.10 is stable so it cuts the 2.0.10-rc.2 tag.
-* Additional testing shows no significant issues with 2.0.10-rc.2 so 2.0.10 is declared to be the LTS Release.
-* The 2.0.10~0.0.0 branch is created off 2.0.10, Feature Freeze on master is lifted.
+* The LTS WG feels that 2.0.10 is stable so it cuts the 2.0-rc.2 tag.
+* Additional testing shows no significant issues with 2.0-rc.2 so 2.0.10 is declared to be the LTS Release.
+* The 2.0.10~0.0.0 branch is created off 2.0.10.
 * Later on, bugs are discovered in the LTS branch that need to be fixed. A Minor bump and several Patches are commited making the updated LTS version 2.0.10~0.1.5
 
 ```
-     +----------------------------------+
-     |      LTS feature freeze          |
-  -------------------------------------------------------> master
-     \  .......................... \
-    2.0.0                        2.0.10 -----------------> (LTS stream)
-      |                           |      \          \
-      |                           |    ~0.0.0     ~x.y.z
-  tag:2.0.10-rc.1           tag:2.0.10-rc.2
+  ---------------------------------------------> master
+     \                   \
+    2.0.0              2.0.10 -----------------> (LTS stream)
+      |                  |     \          \
+      |                  |   ~0.0.0     ~0.1.5
+  tag:2.0-rc.1      tag:2.0-rc.2
 ```
 
 Example:
 * LTS WG declares that there will be an LTS Release in the 2.5.x stream.
 * Major+Minor version rolls over to 2.5.0
-* 2.5.0 is tagged as tag:2.5.0-rc.1, Feature Freeze on master begins
+* 2.5.0 is tagged as tag:2.5-rc.1
 * Several Patches on 2.5.x occur such that the current version is 2.5.6
 * A PR comes in that would roll a Minor version increase to 2.6.0,
 * The LTS WG decides to include the Minor increase in the LTS so that 2.6.x becomes the new LTS Candidate
-* 2.6.0 is tagged as 2.6.0-rc.2
-* A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6.2-rc.3 tag.
-* Additional testing shows no significant issues with 2.6.2-rc.3 so 2.6.2 is declared to be the LTS Release.
-* The 2.6.2~0.0.0 branch is created off 2.6.2, Feature Freeze on master is lifted.
+* 2.6.0 is tagged as 2.6-rc.1
+* A couple additional patches come in and the LTS WG feels that 2.6.2 is stable enough to cut the 2.6-rc.2 tag.
+* Additional testing shows no significant issues with 2.6-rc.2 so 2.6.2 is declared to be the LTS Release.
+* The 2.6.2~0.0.0 branch is created off 2.6.2.
 * Later on, a major security vulnerability in the LTS branch is discovered. The fix requires a backwards compatible breaking change in, forcing a Major bump in the Post release metadata. The 2.6.2~1.0.0 tag is created to reflect the change.
 
 ```
-     +------------------------------------------+
-     |          LTS feature freeze              |
   -------------------------------------------------------> master
-     \  ............ \ ....... \ ......... \
+     \               \         \           \
     2.5.0           2.5.6    2.6.0        2.6.2 ---------> (LTS stream)
       |                        |           |     \      \
-  tag:2.5.0-rc.1        tag:2.6.2-rc.2     |   ~0.0.0 ~1.0.0
-                                     tag:2.6.2-rc.3
+  tag:2.5-rc.1           tag:2.6-rc.1      |   ~0.0.0 ~1.0.0
+                                     tag:2.6-rc.2
 ```
 
-The goal here is to allow LTS Releases to be cut organically without adversely impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely if necessary.
+The goal here is to allow LTS Releases to be cut organically without adversely impacting the overall flow of commits into master. The additional patch metadata, while admittedly annoying, allows the LTS WG to work independently of the primary versioning scheme in master, allowing LTS releases to be cut at any time and even allowing multiple LTS releases within a single Major.Minor stream if necessary. The LTS WG could even decide to skip Major version bumps entirely.
 
 ## Issues Workflow
 
