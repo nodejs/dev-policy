@@ -34,7 +34,7 @@ ____|____/               :                  \______|_____
        (node.js) v0.12.x :  v0.13.x  v0.14.x
 ```
 
-At the time of this writing, the current Node.js release is v0.12.2. The current io.js release is 1.6.4.
+At the time of this writing, the current Node.js release is v0.12.2. The current io.js release is 1.7.1.
 
 Upon Foundation launch, both projects will come together under a single TSC, but the two distinct release lines will continue independently for the near term. Each subsequent release ("interim releases") for each project should incrementally bring the two code bases closer together, allowing them to eventually merge back into a single Node.js 2.0 release line.
 
@@ -121,25 +121,25 @@ Every Working Group must specify a tag that can be used to indicate items for re
 
 The Project source repository will be organized into a single `master` branch, multiple maintenance branches, and multiple development branches. All modifications intended for the current major release line must be made to the `master` branch and must follow the guidelines detailed in this document.
 
-At each new *semver-minor*, a Release tag is cut (e.g. `v2.0`, `v2.1`, etc).
+At each new *semver-patch*, a Release tag is cut (e.g. `v2.0.0`, `v2.0.1`, `v2.1.0`, etc).
 
 ```
           (dev branches)         (dev branches)
           ⇗  ⇗      ⇘  ⇘       ⇗  ⇗      ⇘  ⇘
   -----------------------------------------------------------------> master
       ⇣          ⇣          ⇣          ⇣         ⇣          ⇣
-   tag:v2.0   tag:v2.1   tag:v2.2   tag:v3.0  tag:v3.1   tag:v3.2  (releases)
+  tag:v2.0.0 tag:v2.1.0 tag:v2.2.0 tag:v3.0.0 tag:v3.1.0 tag:v3.2.0  (releases)
 
 ```
 
 Before a new *semver-major*, `master` is branched for maintenance of the prior major (e.g. `v1.x`, `v2.x`).
 
 ```
-                                     v2.x ---------> maintenance
-                                    ⇗
+                                        v2.x ------> maintenance
+                                       ⇗
   -------------------------------------------------> master
-      ⇣         ⇣         ⇣         ⇣
-   tag:v2.0  tag:v2.1  tag:v2.2  tag:v3.0
+       ⇣          ⇣          ⇣         ⇣
+   tag:v2.0.0 tag:v2.1.0 tag:v2.2.0 tag:v3.0.0
 
 ```
 
