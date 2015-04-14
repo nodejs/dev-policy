@@ -318,7 +318,7 @@ By making a contribution to this project, I certify that:
 
 ## Notes
 
-1. The existing Node.js Workflow requires that all PR's can only be landed using a specific Jenkin's "node-accept-pull-request" job. This document requires that all PR's must be tested to ensure that all tests pass but it does not go into specific detail on the CI process. It is expected that a Release Working Group will establish the specific step-by-step process by which Pull Requests must be landed.
+1. The existing Node.js Workflow requires that all PR's can only be landed using a specific Jenkin's "node-accept-pull-request" job. This document requires that all PR's must be tested to ensure that all tests pass but it does not go into specific detail on the CI process. It is expected that the TSC will establish the specific step-by-step process by which Pull Requests must be landed.
 
 2. The existing Node.js Workflow recently introduced the notion of "Priority" and "Status" tags for Issues. For instance, the *P-0* tag can be used to label issues that break node on at least one supported platform and need to be resolved as quickly as possible. The intent of the Priority tags is to assist in the triage of issues and help Collaborators determine which issues to work on first. The io.js project currently does not have a similar mechanism and feedback from io.js participants has been that such a Priority tagging system may not be of use (and could be actively harmful) given the way they've chosen to handle issues.
 
