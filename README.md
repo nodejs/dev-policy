@@ -265,7 +265,7 @@ The Platforms supported by the Node.js project are generally divided into three 
 
 *Deprecated* Platforms consist of platforms for which: (a) there is no active development, (b) there are no Collaborators actively maintaining support, or (c) it is no longer feasible or practical to continue supporting.
 
-It is possible for dependency and build system updates to break the build and CI process for any currently *Supported* platform. This can happen, for instance, when an updated dependency forces the build to use an updated toolchain that is not yet supported on a given platform. In such cases, effort should be made to fix the issue before the next release. However, prior to release, if it becomes clear that the build cannot be fixed on the affected platform, the platform can be moved to *Deprecated* status and landing the change would force a *semver-major* version increase.
+It is possible for build and CI infrastructure updates to cause failures in existing *Supported* platforms. This can happen, for instance, when an updated dependency forces the build to use an updated toolchain that is not yet supported on a given platform. In such cases, Collaborators should be notified  in advance that such changes are expected so that appropriate fixes on affected platforms can be planned and landed. Effort should be made to ensure that the build and CI infrastructure continues to work on all currently *Supported* platforms. Prior to the next release, however, if it becomes clear that the build cannot be fixed on a particular platform, it can be moved to *Deprecated* status and landing the changes would require a *semver-major* version increase.
 
 Support for *Deprecated* Platforms may be removed entirely after the next *semver-major* version increase.
 
