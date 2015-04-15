@@ -301,6 +301,22 @@ When dependencies introduce additional functionality that does not break backwar
 
 While the `npm` utility is shipped as part of Node.js, it is not a functional dependency in the same way as V8, OpenSSL or libuv. Specifically, `npm` is not considered part of the Node.js API. As a general rule, *semver-patch* and *semver-minor* updates in `npm` may be introduced into Node.js with only a *semver-patch* version increase. If there is a *semver-major* update in `npm`, such as when `npm` rolls over to version 3.0.0, then a *semver-major* version increase should occur in Node.js. However, the TSC may alter this policy in the future depending on the nature and scope of changes expected in newer versions of `npm`.
 
+## Working Groups
+
+Working Groups are autonomous groups of Collaborators chartered by the TSC to oversee specific aspects of the Project. Working groups can be formed at any time but must be ratified by the TSC.
+
+Every Working Group has a charter that details it's area of responsibility. Once approved by the TSC, the Working Group becomes solely responsible for items detailed in that charter.
+
+The charter must also indicate the conditions under which the Working Group's activity can be considered to be complete and the WG can be dissolved. A Working Group can, at any time, request that the TSC dissolve the Working Group by opening an issue requesting dissolution with the *tsc-agenda* tag.
+
+The TSC may revoke the Working Groups charter at any time following the decision making process defined in the TSC Charter.
+
+Proposals to create a new Working Group should be made either by opening an issue or submitting a PR with the draft charter for the new Working Group, then putting that on the TSC agenda using the *tsc-agenda* tag.
+
+### Transition of io.js Working Groups
+
+The io.js project currently has a number of Working Groups already chartered as detailed here: https://github.com/iojs/io.js/blob/v1.x/WORKING_GROUPS.md. Upon the launch of the Foundation and approval of the Foundation TSC charter, these existing Working Groups (and their existing membership) would be absorbed into the project. However, the TSC should perform a one-time review the existing WG charters and determine if rechartering is required. It is expected that most (if not all) the existing Working Groups will be transitioned without requiring recharter.
+
 ## Developer's Certificate of Origin 1.0
 
 By making a contribution to this project, I certify that:
