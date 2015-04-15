@@ -88,6 +88,14 @@ All Pull Requests that either fix bugs or introduce new functionality require at
 
 Pull Requests for changes intended to improve performance require a benchmark demonstrating the performance impact. The benchmark should demonstrate improved performance after the change is applied.
 
+### Release-related Commits and error corrections
+
+When cutting a new release, it is typically necessary to commit a few specific changes to the repository. These include tasks like updating the release notes and incrementing the current version number.
+
+It's also possible for errors to come up in the basic management of the project repository (caused either by simple human error or bugs in the tooling used to manage the project). Correction of such errors may require additional changes to be landed. 
+
+Such changes can be landed after a significantly shorter review period if the changes are strictly targeted at repairing the current state of the repository or cutting a new release. Effort should still be made to solicit review of such changes in advance of landing them.
+
 ### Landing Pull Requests
 
 When Landing a Pull Request, a Collaborator must modify the original commit message to include the following additional meta information regarding the change process:
