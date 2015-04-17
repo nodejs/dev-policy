@@ -1,3 +1,29 @@
+## Table of Contents
+
+- [__Guiding Principles__](#guiding-principles)
+- [__About this document__](#about-this-document)
+- [__Repository Reconciliation Plan__](#repository-reconciliation-plan)
+- [__Contributing__](#contributing)
+  - [Collaborators](#collaborators)
+  - [Accepting Modifications](#accepting-modifications-through-a-consensus-seeking-process)
+  - [Release-related Commits](#release-related-commits-and-error-corrections)
+  - [Landing Pull Requests](#landing-pull-requests)
+  - [Issue Tagging](#issue-and-pull-request-tagging)
+- [__Release Process and Branching Model__](#release-process-and-branching-model)
+  - [Release Versioning](#release-versioning)
+  - [Release Process for Master](#release-process-for-master)
+- [__Long Term Support Working Group__](#long-term-support-working-group-roadmap)
+- [__Issues Workflow__](#issues-workflow)
+- [__Stability Policy__](#stability-policy)
+  - [Implicit vs. Explicit API Stability](#implicit-vs-explicit-api-stability)
+  - [Platform Stability](#platform-stability)
+  - [Dependency Stability](#dependency-stability)
+- [__Developer's Certificate of Origin 1.0__](#developers-certificate-of-origin-10)
+- [__A Few Open Questions__](#a-few-open-questions)
+- [__Notes__](#notes)
+
+---
+
 ## Guiding Principles
 
 The Fundamental goal of the Node.js Project is to provide a JavaScript-based application development platform that is *current*, *reliable* and *stable*.
@@ -92,7 +118,7 @@ Pull Requests for changes intended to improve performance require a benchmark de
 
 When cutting a new release, it is typically necessary to commit a few specific changes to the repository. These include tasks like updating the release notes and incrementing the current version number.
 
-It's also possible for errors to come up in the basic management of the project repository (caused either by simple human error or bugs in the tooling used to manage the project). Correction of such errors may require additional changes to be landed. 
+It's also possible for errors to come up in the basic management of the project repository (caused either by simple human error or bugs in the tooling used to manage the project). Correction of such errors may require additional changes to be landed.
 
 Such changes can be landed after a significantly shorter review period if the changes are strictly targeted at repairing the current state of the repository or cutting a new release. Effort should still be made to solicit review of such changes in advance of landing them.
 
