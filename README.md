@@ -307,7 +307,7 @@ Working Groups are autonomous groups of Collaborators chartered by the TSC to ov
 
 Every Working Group has a charter that details it's area of responsibility. Once approved by the TSC, the Working Group becomes solely responsible for items detailed in that charter.
 
-The charter must also indicate the conditions under which the Working Group's activity can be considered to be complete and the WG can be dissolved. A Working Group can, at any time, request that the TSC dissolve the Working Group by opening an issue requesting dissolution with the *tsc-agenda* tag.
+When applicable, the charter should indicate the conditions under which the Working Group's activity can be considered to be complete and the WG can be dissolved. A Working Group can, at any time, request that the TSC dissolve the Working Group by opening an issue requesting dissolution with the *tsc-agenda* tag.
 
 The TSC may revoke the Working Groups charter at any time following the decision making process defined in the TSC Charter.
 
@@ -315,7 +315,7 @@ Proposals to create a new Working Group should be made either by opening an issu
 
 ### Transition of io.js Working Groups
 
-The io.js project currently has a number of Working Groups already chartered as detailed here: https://github.com/iojs/io.js/blob/v1.x/WORKING_GROUPS.md. Upon the launch of the Foundation and approval of the Foundation TSC charter, these existing Working Groups (and their existing membership) would be absorbed into the project. However, the TSC should perform a one-time review the existing WG charters and determine if rechartering is required. It is expected that most (if not all) the existing Working Groups will be transitioned without requiring recharter.
+The io.js project currently has a number of Working Groups already chartered as detailed here: https://github.com/iojs/io.js/blob/v1.x/WORKING_GROUPS.md. Upon the launch of the Foundation and approval of the Foundation TSC charter, these existing Working Groups (and their existing membership) would be absorbed into the project (see https://github.com/joyent/nodejs-advisory-board/blob/master/governance-proposal/WG-Merger.md). The TSC should perform a one-time review the existing WG charters and determine if any modification of their existing charters are required. It is expected that most (if not all) of the existing Working Groups will be transitioned without requiring recharter.
 
 ## Developer's Certificate of Origin 1.0
 
