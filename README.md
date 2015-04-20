@@ -135,6 +135,10 @@ Additionally, Collaborators should:
 * Double check Pull Requests to make sure the author's full name and email address are correct before merging.
 * Verify that every commit passes all tests.
 
+### Seeking early review for significant changes
+
+When Collaborators propose to either make significant modifications to existing functionality or contribute new APIs and capabilities, the best practice is to follow an open "early review" process that allows other Collaborators and Node.js users to experiment with and provide feedback on the proposed contributions well before they land in `master`. One method of allowing this is to open a Pull Request with the *in-progress* tag that clearly indicates that the Pull Request is not yet ready to land. Such Pull Requests should contain enough detailed information about the changes being proposed to allow a reviewer to evaluate both the intent and the design of the changes. 
+
 ### Issue and Pull Request Tagging
 
 All Issues and Pull Requests should be tagged with their respective feature areas. This helps organize issues and makes it easier for Collaborators to keep track of the items most relevant to them.
