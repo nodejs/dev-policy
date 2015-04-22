@@ -18,6 +18,8 @@
   - [Implicit vs. Explicit API Stability](#implicit-vs-explicit-api-stability)
   - [Platform Stability](#platform-stability)
   - [Dependency Stability](#dependency-stability)
+  [__Working Groups__](#working-groups)
+  - [Transition of io.js Working Groups](#transition-of-iojs-working-groups)
 - [__Developer's Certificate of Origin 1.0__](#developers-certificate-of-origin-10)
 - [__A Few Open Questions__](#a-few-open-questions)
 - [__Notes__](#notes)
