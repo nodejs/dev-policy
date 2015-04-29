@@ -480,7 +480,9 @@ Doc & Test commits are handled in generally the same way as Fix commits.
 
 While the repositories are being merged, the existing io.js and node release streams will continue to operate. This implies that there will be new commits to both that will also need to be merged into the converged repo. Those are to be handled in generally the same way as the other commits.
 
-However, once the Foundation launches, the decision making process for both release streams follows the Foundation TSC guidelines with the combined TSC overseeing both individual release lines. Decisions about features / fixes going into the separate node.js and io.js lines will be the responsibility of the *combined* TSC. This helps to ensure that the decisions for what items make it into the converged project are being properly reviewed following the Foundation process.
+Once the Foundation launches, the decision making process for both release streams follows the Foundation TSC guidelines with the combined TSC overseeing both individual release lines. That said, the TSC can delegate the day-to-day details of managing each release line to the existing individual project TCs.
+
+While work is being done to converge the two lines, care must be taken when landing features or fixes in either line that would impact or conflict with changes being made in the other line. The goal is to avoid a situation where the release lines diverge further *after* the Foundation launch while effort is being made to bring the lines together. When significant changes come in that can have an impact on the larger effort, those should be reviewed by the combined TSC.
 
 #### Exit Criteria
 
