@@ -260,7 +260,64 @@ Current github statistics show that the joyent/node repository has 10,604 commit
 
 The github.com/iojs organization was established to support the io.js project.
 
-The organization currently contains 112 members. (https://github.com/orgs/iojs/people)
+The organization currently contains 282 members (https://github.com/orgs/iojs/people). There are 54 teams. (https://github.com/orgs/iojs/teams)
+
+Teams:
+
+* addon-api
+* Bots
+* build
+* Collaborators
+* Community-Members
+* Core
+* crypto
+* docker
+* docker-admin
+* evangelism
+* hardware
+* iojs-ar
+* iojs-bg
+* iojs-bn
+* iojs-cn
+* iojs-cs
+* iojs-da
+* iojs-de
+* iojs-el
+* iojs-es
+* iojs-fa
+* iojs-fi
+* iojs-fr
+* iojs-he
+* iojs-hi
+* iojs-hu
+* iojs-id
+* iojs-it
+* iojs-ja
+* iojs-ka
+* iojs-ko
+* iojs-mk
+* iojs-ms
+* iojs-nl
+* iojs-no
+* iojs-pl
+* iojs-pt
+* iojs-ro
+* iojs-ru
+* iojs-sv
+* iojs-ta
+* iojs-tr
+* iojs-tw
+* iojs-uk
+* iojs-vi
+* platform-arm
+* platform-freebsd
+* platform-solaris
+* platform-windows
+* Streams
+* Supports
+* TC
+* Tracing
+* Website
 
 #### Repositories
 
@@ -386,24 +443,21 @@ Current statistics show 11,369 commits (which include some overlap with joyent/n
   * http://github.com/joyent/http-parser
   * http://github.com/joyent/node-tracing ?
   * http://github.com/joyent/docker-node ?
-7. Once transferred, the `joyent/node` repository will be renamed to `nodejs-foundation/joyent-node`
-8. A new repository will be created called `nodejs-foundation/node`. This repository will become the converged project repository. The existing `nodejs-foundation/joyent-node` and `nodejs-foundation/io.js` repositories would continue in parallel to support each distinct release line.
+7. A new repository will be created called `nodejs-foundation/node.js`. This repository will become the converged project repository. The existing `nodejs-foundation/node` and `nodejs-foundation/io.js` repositories would continue in parallel to support each distinct release line.
+
+Note: Step 6 might be optional. There may not be need to physically move those existing repositories under the Foundation organization. The decision will be made during the actual merge process.
 
 ## Converging the Projects
 
-Once the organization merge has been completed, the `nodejs-foundation/joyent-node` and `nodejs-foundation/io.js` repositories would need to be systematically merged into a single `nodejs-foundation/node` repository. This task will be nontrivial and may be controversial.
+Once the organization merge has been completed, the `nodejs-foundation/node` and `nodejs-foundation/io.js` repositories would need to be systematically merged into a single `nodejs-foundation/node.js` repository. This task will be nontrivial and may be controversial.
 
-To level set, there should be a basic ground rule: *All* features and capabilities currently supported by the current releases of both projects should be merged with no regressions, even if there are questions or disagreements over the current implementation of those items.
+To level set, there should be a basic ground rule: *All* features and capabilities currently supported by the current releases of both projects should be merged with no regressions, even if there are initial questions or disagreements over the current implementation of those items.
 
-This means that there is no loss of functionality between the two projects.  
-
-Specifically, this means that controversial items such as the current V8 build level in `iojs/io.js` and the Intl stuff currently in `joyent/node v0.12` _would be accepted as they currently are_ within each project line, with exception given only to changes necessary to resolve merge conflicts and build/test issues to ensure that master is kept at production ready status.
-
-Where there is disagreement about the implementation of any given item, an iterative development approach will be followed _post-merge_ following the Foundation decision making process and documented development guidelines.
+Areas of potential disagreement should be identified *before* the merge so that compromise resolutions can be found either in advance or during the merge process. Changes to specific implementation details of existing features might be necessary but *as a general rule*, there should be no loss of functionality between the two projects. If something worked pre-merge in either Node.js or io.js, it should continue to work post-merge.
 
 ### Merge Process
 
-Of the two existing repositories, `iojs/io.js` has been the most active since the fork. Since that time, there has been some cherry-picking of commits between the two projects but the activity has been inconsistent and the separate code bases have diverged in fairly significant ways. Based on the commit history, the easiest merge approach will be to create the new `nodejs-foundation/node` repository as a Fork of the existing `iojs/io.js` (`nodejs-foundation/io.js`) repository, then cherry pick commits from `joyent/node` (`nodejs-foundation/joyent-node`) to merge in. Unfortunately, this will not be as easy as simply using `git format-patch` and `git am`.
+Of the two existing repositories, `iojs/io.js` has been the most active since the fork. Since that time, there has been some cherry-picking of commits between the two projects but the activity has been inconsistent and the separate code bases have diverged in fairly significant ways. Based on the commit history, the easiest merge approach will be to create the new `nodejs-foundation/node` repository as a Fork of the existing `iojs/io.js` (`nodejs-foundation/io.js`) repository, then cherry pick commits from `joyent/node` (`nodejs-foundation/node`) to merge in. Unfortunately, this will not be as easy as simply using `git format-patch` and `git am`.
 
 The commits generally fall into three categories:
 
@@ -430,11 +484,11 @@ However, once the Foundation launches, the decision making process for both rele
 
 #### Exit Criteria
 
-The converged repository will become the main repository for Node.js releases as soon as the TSC determines that the merger of the two projects is: (a) complete and (b) passes all tests demonstrating that the `master` is production ready. At this point, the `nodejs-foundation/io.js` and `nodejs-foundation/joyent-node` repositories move into maintenance mode only to support LTS of the prior release lines.
+The converged repository will become the main repository for Node.js releases as soon as the TSC determines that the merger of the two projects is: (a) complete and (b) passes all tests demonstrating that the `master` is production ready. At this point, the `nodejs-foundation/io.js` and `nodejs-foundation/node` repositories move into maintenance mode only to support LTS of the prior release lines.
 
 ## Issues
 
-The existing `nodejs-foundation/io.js` and `nodejs-foundation/joyent-node` issue databases would continue to be maintained. A brand new `nodejs-foundation/node` issue database will be established with a "clean slate". The existing io.js approach to managing issues will be adopted with this new issues database.
+The existing `nodejs-foundation/io.js` and `nodejs-foundation/node` issue databases would continue to be maintained. A brand new `nodejs-foundation/node.js` issue database will be established with a "clean slate". The existing io.js approach to managing issues will be adopted with this new issues database.
 
 ## Website and Social Media
 
