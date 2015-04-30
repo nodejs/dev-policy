@@ -5,6 +5,16 @@ the existing joyent/node and iojs/io.js repositories
 
 **This is a draft**. Nothing in this document should be considered binding or final.
 
+## Convergence Working Repository
+
+The working convergence repository has been created at:
+
+  https://github.com/jasnell/node.js-convergence
+
+The current collaborators for both Node.js and io.js have been added.
+
+Once the final decision is made on whether io.js org will be moved or a new org will be created, ownership of the convergence repo will be transfered.
+
 ## Organization Overview
 
 ### Joyent
