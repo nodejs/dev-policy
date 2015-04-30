@@ -36,8 +36,8 @@ Node and several of it's dependencies / related projects currently reside within
 * http://github.com/joyent/node-website
 * http://github.com/joyent/node-advisory-board
 * http://github.com/joyent/http-parser
-* http://github.com/joyent/node-tracing ?
-* http://github.com/joyent/docker-node ?
+* http://github.com/joyent/docker-node
+* http://github.com/joyent/node-tracing (is this one still relevant?)
 
 #### joyent/node branches
 
@@ -434,15 +434,15 @@ Current statistics show 11,369 commits (which include some overlap with joyent/n
   * The existing joyent node-coreteam members.
   * The existing iojs TC members.
   * Additional supporting staff selected by the Foundation Board.
-4. All members of the existing node-coreteam will be added as Collaborators within the organization
+4. All members of the existing node-coreteam will be added as Collaborators within the organization.
 5. A team representing the TSC members will be created (if one does not already exist). The membership of this team will be all current voting members of both the node-coreteam and io.js TC.
 6. Ownership of the following joyent/* repositories will be transferred to the Node.js Foundation organization:
   * http://github.com/joyent/node
   * http://github.com/joyent/node-website
   * http://github.com/joyent/node-advisory-board
   * http://github.com/joyent/http-parser
-  * http://github.com/joyent/node-tracing ?
-  * http://github.com/joyent/docker-node ?
+  * http://github.com/joyent/docker-node
+  * http://github.com/joyent/node-tracing (not clear if this one needs to move)
 7. A new repository will be created called `nodejs-foundation/node.js`. This repository will become the converged project repository. The existing `nodejs-foundation/node` and `nodejs-foundation/io.js` repositories would continue in parallel to support each distinct release line.
 
 Note: Step 6 might be optional. There may not be need to physically move those existing repositories under the Foundation organization. The decision will be made during the actual merge process.
@@ -457,7 +457,7 @@ Areas of potential disagreement should be identified *before* the merge so that 
 
 ### Merge Process
 
-Of the two existing repositories, `iojs/io.js` has been the most active since the fork. Since that time, there has been some cherry-picking of commits between the two projects but the activity has been inconsistent and the separate code bases have diverged in fairly significant ways. Based on the commit history, the easiest merge approach will be to create the new `nodejs-foundation/node` repository as a Fork of the existing `iojs/io.js` (`nodejs-foundation/io.js`) repository, then cherry pick commits from `joyent/node` (`nodejs-foundation/node`) to merge in. Unfortunately, this will not be as easy as simply using `git format-patch` and `git am`.
+Of the two existing repositories, `iojs/io.js` has been the most active since the fork. Since that time, there has been some cherry-picking of commits between the two projects but the activity has been inconsistent and the separate code bases have diverged in fairly significant ways. Based on the commit history, the easiest merge approach will be to create the new `nodejs-foundation/node.js` repository as a Fork of the existing `iojs/io.js` (`nodejs-foundation/io.js`) repository, then cherry pick commits from `joyent/node` (`nodejs-foundation/node`) to merge in. Unfortunately, this will not be as easy as simply using `git format-patch` and `git am`.
 
 The commits generally fall into three categories:
 
@@ -488,6 +488,108 @@ While work is being done to converge the two lines, care must be taken when land
 
 The converged repository will become the main repository for Node.js releases as soon as the TSC determines that the merger of the two projects is: (a) complete and (b) passes all tests demonstrating that the `master` is production ready. At this point, the `nodejs-foundation/io.js` and `nodejs-foundation/node` repositories move into maintenance mode only to support LTS of the prior release lines.
 
+### Build and CI Environment
+
+Node.js and io.js each currently use separate build and CI environments that will need to be merged. Given that this is a fairly specialized task that will require coordination with multiple parties and knowledge of specific platforms, the specific steps involved with merging the environments will be delegated to the Build Working Group which will be expanded to consist of members from both existing projects.
+
+#### Node.js Jenkins
+
+The Node.js Jenkins environment is hosted at http://jenkins.nodejs.org and is managed by Joyent. It is currently on Jenkins version 1.590.
+
+There are currently 14 nodes including the master. These cover:
+
+* centos-5.7
+* freebsd9.1
+* master
+* osx-build
+* osx-home
+* smartos-base-13.3.1
+* smartos-base-13.4.0
+* smartos-nodejs.org
+* ubuntu-10.04
+* ubuntu-12.04
+* ubuntu-14.04
+* windows-2k12
+* windows-2k8r2
+* windows-azure
+
+Based on the configuration information available within Jenkins, it is not clear exactly where these nodes are hosted and whether they are owned or provided assets.
+
+#### io.js Jenkins
+
+The io.js Jenkins environment is hosted at https://jenkins-iojs.nodesource.com and is managed by NodeSource. It is currently on Jenkins version 1.6.10.
+
+There are currently 60 nodes including the master. These cover:
+
+* iojs-digitalocean-centos5-32-1
+* iojs-digitalocean-centos5-64-1
+* iojs-digitalocean-centos5-gcc41-32-1
+* iojs-digitalocean-centos5-gcc41-64-1
+* iojs-digitalocean-centos5-release-32-1
+* iojs-digitalocean-centos5-release-64-1
+* iojs-digitalocean-centos6-64-1
+* iojs-digitalocean-centos6-64-gcc44-1
+* iojs-digitalocean-centos7-64-1
+* iojs-digitalocean-containers-debian+stable-1
+* iojs-digitalocean-containers-debian+stable-2
+* iojs-digitalocean-containers-debian+testing-1
+* iojs-digitalocean-containers-debian+testing-2
+* iojs-digitalocean-containers-ubuntu+lucid-1
+* iojs-digitalocean-containers-ubuntu+lucid-2
+* iojs-digitalocean-containers-ubuntu+precise-1
+* iojs-digitalocean-containers-ubuntu+precise-2
+* iojs-digitalocean-containers-ubuntu+trusty-1
+* iojs-digitalocean-containers-ubuntu+trusty-2
+* iojs-digitalocean-fedora21-1
+* iojs-digitalocean-ubuntu1004-32-1
+* iojs-digitalocean-ubuntu1004-64-1
+* iojs-digitalocean-ubuntu1204-64-1
+* iojs-digitalocean-ubuntu1404-32-1
+* iojs-digitalocean-ubuntu1404-64-1
+* iojs-digitalocean-ubuntu1404-gyp-32-1
+* iojs-digitalocean-ubuntu1404-gyp-64-1
+* iojs-digitalocean-ubuntu1410-64-1
+* iojs-digitalocean-ubuntu1504-64-1
+* iojs-joyent-smartos14-32-1
+* iojs-joyent-smartos14-64-1
+* iojs-linaro-armv8-ubuntu1404
+* iojs-nodesource-armv7-ubuntu1401
+* iojs-nodesource-armv7-ubuntu1401-release
+* iojs-nodesource-raspbian-wheezy-pi1-1
+* iojs-nodesource-raspbian-wheezy-pi1-2
+* iojs-nodesource-raspbian-wheezy-pi1p-1
+* iojs-nodesource-raspbian-wheezy-pi2-1
+* iojs-nodesource-raspbian-wheezy-pi2-2
+* iojs-nodesource-raspbian-wheezy-pi2-3
+* iojs-nodesource-raspbian-wheezy-pi2-4
+* iojs-online_net-armv7-wheezy-1
+* iojs-online_net-armv7-wheezy-2
+* iojs-online_net-armv7-wheezy-release-1
+* iojs-rackspace-debian8-64-1
+* iojs-rackspace-win2008r2-1
+* iojs-rackspace-win2008r2-2
+* iojs-rackspace-win2008r2-release-1
+* iojs-rackspace-win2008r2-release-2
+* iojs-rackspace-win2012r2-1
+* iojs-rackspace-win2012r2-2
+* iojs-rackspace-win2012r2-msvs2015-1
+* iojs-voxer-freebsd101-32-1
+* iojs-voxer-freebsd101-64-1
+* iojs-voxer-osx1010-1
+* iojs-voxer-osx1010-2
+* iojs-voxer-osx1010-release-pkg-1
+* iojs-voxer-osx1010-release-pkg-2
+* iojs-voxer-osx1010-release-tar-1
+* master
+
+The nodes are provided by multiple third parties including NodeSource, DigitalOcean, Rackspace, and others.
+
+### Merging the CI environments
+
+Because the `nodejs.org` domain will transfer ownership to the Node.js Foundation, and because there is an existing `jenkins.nodejs.org` domain, it makes sense to use that domain for the combined Jenkins environment. The Build Working Group will need to put together the plan for combining the two Jenkins environments into one, including determination of where the master will be hosted.
+
+The existing nodes need to be catalogued and organized into donated or owned assets. A transition plan for build assets currently owned by Joyent needs to be put in place. Will Joyent continue to provide those assets for use by the foundation? Will they be donated or leased? Likewise for all existing build assets used by io.js. If the build assets are donated, with the current providers of those be willing to continue providing those assets to the Node.js Foundation? If so, new agreements likely need to be drawn up. If the assets are leased or purchased, will the ownership of those leases or assets be transferred to the Foundation? Will the Foundation need to allocate a certain budget for those assets, etc. These details will need to be worked out but, in the interim, it should be possible to use either of the existing Jenkins environments to ensure continuity.
+
 ## Issues
 
 The existing `nodejs-foundation/io.js` and `nodejs-foundation/node` issue databases would continue to be maintained. A brand new `nodejs-foundation/node.js` issue database will be established with a "clean slate". The existing io.js approach to managing issues will be adopted with this new issues database.
@@ -496,6 +598,6 @@ The existing `nodejs-foundation/io.js` and `nodejs-foundation/node` issue databa
 
 Ownership of the iojs.org and nodejs.org domains will transfer to the Node.js Foundation. The existing nodejs.org and iojs.org websites will be merged and managed by a Website Working Group chartered by the TSC with staff and management assistance provided by the Node.js Foundation.
 
-Ownership of the existing @nodejs and @official_iojs Twitter handles will transfer to the Node.js Foundation and will become the responsibility of the Evangelization Working Group with staff and management assistance provided by the Node.js Foundation.
+Ownership of the existing @nodejs and @official_iojs Twitter handles, Google+ and Facebook accounts will transfer to the Node.js Foundation and will become the responsibility of the Evangelization Working Group with staff and management assistance provided by the Node.js Foundation.
 
 Ownership of the existing @nodejs mail servers will transfer to the Node.js Foundation and will become the responsibility of the TSC with staff and management assistance provided by the Node.js Foundation.
