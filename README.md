@@ -209,6 +209,16 @@ Master must pass a full CI test run prior to release.
 
 If master contains changes which are tagged *semver-minor* then the release should bump the minor version otherwise it is a patch release.
 
+### Release Process for Next Branch
+
+Releases should not contain too many code changes and if the rate of code changes is high then it should correspond to an increase in the rate of releases. It is expected that there should be about one release per week.
+
+`next` must pass a full CI test run prior to release.
+
+If `next` contains changes which are tagged *semver-minor* then the release should bump the minor version otherwise it is a patch release.
+
+Releases in `next` are expected to happen concurrently to `master` releases and adopt new v8 on a semi-regular basis.
+
 ## Long Term Support Working Group Roadmap
 
 The LTS WG is expected to establish a regular and predictable cadence of LTS Releases. To this end, the LTS WG must maintain and regularly publish a clear Roadmap that outlines the priorities and milestones for upcoming LTS Releases. The goal of the Roadmap is to help guide the project's evolution as opposed to constraining it.
