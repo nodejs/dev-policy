@@ -353,6 +353,12 @@ Proposals to create a new Working Group should be made either by opening an issu
 
 The io.js project currently has a number of Working Groups already chartered as detailed here: https://github.com/iojs/io.js/blob/v1.x/WORKING_GROUPS.md. Upon the launch of the Foundation and approval of the Foundation TSC charter, these existing Working Groups (and their existing membership) would be absorbed into the project (see https://github.com/joyent/nodejs-advisory-board/blob/master/governance-proposal/WG-Merger.md). The TSC should perform a one-time review the existing WG charters and determine if any modification of their existing charters are required. It is expected that most (if not all) of the existing Working Groups will be transitioned without requiring recharter.
 
+### User Working Group
+
+The Foundation TSC should work to organize a special Working Group that represents the community of Node.js *users*. Unlike other Working Groups, whose members are Collaborators, the User Working Group would be made up of individuals from the Node.js user community specifically invited by the TSC. The purpose of the User Working Group is to document the issues and requirements important to the user community as a whole. While the members of the User Working Group may not be Collaborators with direct commit access to the project repository, the User Working Group will be able to weigh in on discussions and decisions that affect the project as a whole, including nominating a representative from the User Working Group to participate in the TSC.
+
+The initial membership of the User Working Group would be selected by the TSC. New members to the User Working Group are nominated by the TSC and ratified by the existing User Working Group membership following the decision making process described in the TSC Charter.
+
 ## Developer's Certificate of Origin 1.0
 
 By making a contribution to this project, I certify that:
