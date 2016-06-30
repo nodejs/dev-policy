@@ -353,15 +353,33 @@ Proposals to create a new Working Group should be made either by opening an issu
 
 The io.js project currently has a number of Working Groups already chartered as detailed here: https://github.com/iojs/io.js/blob/v1.x/WORKING_GROUPS.md. Upon the launch of the Foundation and approval of the Foundation TSC charter, these existing Working Groups (and their existing membership) would be absorbed into the project (see https://github.com/joyent/nodejs-advisory-board/blob/master/governance-proposal/WG-Merger.md). The TSC should perform a one-time review the existing WG charters and determine if any modification of their existing charters are required. It is expected that most (if not all) of the existing Working Groups will be transitioned without requiring recharter.
 
-## Developer's Certificate of Origin 1.0
+<a id="developers-certificate-of-origin"></a>
+## Developer's Certificate of Origin 1.1
 
 By making a contribution to this project, I certify that:
 
-(a) The contribution was created in whole or in part by me and I have the right to submit it under the open source license indicated in the file; or
+* (a) The contribution was created in whole or in part by me and I
+  have the right to submit it under the open source license
+  indicated in the file; or
 
-(b) The contribution is based upon previous work that, to the best of my knowledge, is covered under an appropriate open source license and I have the right under that license to submit that work with modifications, whether created in whole or in part by me, under the same open source license (unless I am permitted to submit under a different license), as indicated in the file; or
+* (b) The contribution is based upon previous work that, to the best
+  of my knowledge, is covered under an appropriate open source
+  license and I have the right under that license to submit that
+  work with modifications, whether created in whole or in part
+  by me, under the same open source license (unless I am
+  permitted to submit under a different license), as indicated
+  in the file; or
 
-(c) The contribution was provided directly to me by some other person who certified (a), (b) or (c) and I have not modified it.
+* (c) The contribution was provided directly to me by some other
+  person who certified (a), (b) or (c) and I have not modified
+  it.
+
+* (d) I understand and agree that this project and the contribution
+  are public and that a record of the contribution (including all
+  personal information I submit with it, including my sign-off) is
+  maintained indefinitely and may be redistributed consistent with
+  this project or the open source license(s) involved.
+
 
 ## A Few Open Questions
 
